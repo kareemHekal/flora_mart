@@ -27,4 +27,5 @@ class AppStrings {
       "phoneNumberCannotBeMoreThan20Characters".tr();
   static String get passwordMustContainAtLeastOneSpecialCharacter =>
       "passwordMustContainAtLeastOneSpecialCharacter".tr();
+
 }
