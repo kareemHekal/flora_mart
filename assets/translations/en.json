@@ -1,3 +1,20 @@
 {
-  "address": "Address"
+  "address": "Address",
+  "emailCantBeEmpty": "Email cannot be empty",
+  "thePinCodeIsWrong": "The Pin Code is Wrong",
+  "enterValidEmailAddress": "Enter a valid email address",
+  "passwordCantBeEmpty": "Password cannot be empty",
+  "passwordMustBeAtLeast6Characters": "Password must be at least 6 characters",
+  "passwordMustContainAtLeastOneUppercaseLetter": "Password must contain at least one uppercase letter",
+  "passwordMustContainAtLeastOneNumber": "Password must contain at least one number",
+  "passwordsDoNotMatch": "Passwords do not match",
+  "userNameCannotBeEmpty": "User name cannot be empty",
+  "userNameCannotBeMoreThan20Characters": "User name cannot be more than 20 characters",
+  "firstNameCannotBeEmpty": "First name cannot be empty",
+  "firstNameCannotBeMoreThan20Characters": "First name cannot be more than 20 characters",
+  "lastNameCannotBeEmpty": "Last name cannot be empty",
+  "lastNameCannotBeMoreThan20Characters": "Last name cannot be more than 20 characters",
+  "phoneNumberCannotBeEmpty": "Phone number cannot be empty",
+  "phoneNumberCannotBeMoreThan20Characters": "Phone number cannot be more than 20 characters",
+  "passwordMustContainAtLeastOneSpecialCharacter": "Password must contain at least one special character"
 }
