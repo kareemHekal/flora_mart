@@ -1,0 +1,26 @@
+name: Flutter Linting
+
+on:
+  pull_request:
+    branches:
+      - development  # أو "develop" حسب الفرع الذي تريد حمايته
+
+jobs:
+  lint:
+    name: Run Flutter Linter
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: stable
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run Linting
+        run: flutter analyze
