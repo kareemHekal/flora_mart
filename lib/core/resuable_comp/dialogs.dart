@@ -28,7 +28,7 @@ class Dialogs {
           ),
           content: Text(
             AppStrings.guestRestrictionMessage,
-            style: TextStyle(fontSize: 16),
+            style: TextStyle(color: Theme.of(context).colorScheme.secondary),
           ),
           actions: [
             TextButton(
@@ -45,10 +45,10 @@ class Dialogs {
                     context, RouteManager.loginScreen, (route) => false);
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.pinkAccent,
+                backgroundColor: Theme.of(context).primaryColor,
               ),
-              child:
-                  Text(AppStrings.login, style: TextStyle(color: Colors.white)),
+              child: Text(AppStrings.login,
+                  style: Theme.of(context).textTheme.labelLarge),
             ),
           ]),
     );
