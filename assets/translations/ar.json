@@ -16,5 +16,16 @@
   "lastNameCannotBeMoreThan20Characters": "لا يمكن أن يكون الاسم الأخير أكثر من 20 حرفًا",
   "phoneNumberCannotBeEmpty": "لا يمكن أن يكون رقم الهاتف فارغًا",
   "phoneNumberCannotBeMoreThan20Characters": "لا يمكن أن يكون رقم الهاتف أكثر من 20 حرفًا",
-  "passwordMustContainAtLeastOneSpecialCharacter": "يجب أن تحتوي كلمة المرور على رمز خاص واحد على الأقل"
+  "passwordMustContainAtLeastOneSpecialCharacter": "يجب أن تحتوي كلمة المرور على رمز خاص واحد على الأقل",
+  "login": "تسجيل الدخول",
+  "loginSuccessfully": "تم تسجيل الدخول بنجاح",
+  "email": "البريد الإلكتروني",
+  "enterYourEmail": "أدخل بريدك الإلكتروني",
+  "password": "كلمة المرور",
+  "enterPassword": "ادخل كلمة المرور",
+  "rememberMe": "تذكرني",
+  "forgetpassword": "نسيت كلمة المرور؟",
+  "dontHaveAccount": "ليس لديك حساب؟",
+  "countinueAsGuest": "استمر كزائر",
+  "signUp": "إنشاء حساب"
 }

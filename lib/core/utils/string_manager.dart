@@ -27,5 +27,15 @@ class AppStrings {
       "phoneNumberCannotBeMoreThan20Characters".tr();
   static String get passwordMustContainAtLeastOneSpecialCharacter =>
       "passwordMustContainAtLeastOneSpecialCharacter".tr();
-
+  static String get login => "login".tr();
+  static String get loginSuccessfully => "loginSuccessfully".tr();
+  static String get email => "email".tr();
+  static String get enterYourEmail => "enterYourEmail".tr();
+  static String get password => "password".tr();
+  static String get enterPassword => "enterPassword".tr();
+  static String get rememberMe => "rememberMe".tr();
+  static String get forgetpassword => "forgetpassword".tr();
+  static String get dontHaveAccount => "dontHaveAccount".tr();
+  static String get signUp => "signUp".tr();
+  static String get countinueAsGuest => "countinueAsGuest".tr();
 }

@@ -4,7 +4,8 @@ class CacheHelper {
   static SharedPreferences? _sharedPrefs;
   // we can save the keys over here
   // so that we can use them in the app like this 👇👇
-  //  >>  static const String _tokenKey = 'auth_token';
+  static const String tokenKey = 'auth_token';
+  static const String isRememberMe = 'isRememberMe';
 
   static Future<void> init() async {
     _sharedPrefs = await SharedPreferences.getInstance();
@@ -14,7 +15,9 @@ class CacheHelper {
   /// bool set = await CacheHelper.setData<String>("token", response.data['token']);
   static Future<bool> setData<T>(String key, T value) async {
     if (_sharedPrefs == null) await init();
-
+    if (value == null) {
+      return await _sharedPrefs!.remove(key); // Remove key if value is null
+    }
     if (value is String) {
       return await _sharedPrefs!.setString(key, value);
     } else if (value is bool) {

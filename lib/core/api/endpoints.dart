@@ -1,3 +1,3 @@
-class EndPoint{
-  static const String signInEndpoint="/v1/auth/signin";
+class EndPoint {
+  static const String signInEndpoint = "api/v1/auth/signin";
 }
