@@ -57,7 +57,7 @@ class LoginCubit extends Cubit<LoginStates> {
           }
         }
         break;
-
+        // ========== Save Token  ========= \\
       case ErrorApiResult():
         print("${result.exception.toString()} Error ⛔⛔");
         emit(LoginErrorState(message: result.exception.toString()));

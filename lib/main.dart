@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flora_mart/core/cache/shared_pref.dart';
+import 'package:flora_mart/core/observer/BlocObserver.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/api/api_manager.dart';
 import 'core/di/di.dart';
@@ -10,6 +12,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   configureDependencies();
+  Bloc.observer = MyBlocObserver();
   ApiManager.init();
   await CacheHelper.init();
   runApp(EasyLocalization(

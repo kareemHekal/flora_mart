@@ -9,6 +9,7 @@ class AppTheme {
 
     // 🎨 ألوان التطبيق
     colorScheme: ColorScheme.light(
+
       primary: ColorManager.primaryColor, // اللون الأساسي
       secondary: Colors.black87, // الخلفية
       surface: Colors.white, // سطح البطاقات

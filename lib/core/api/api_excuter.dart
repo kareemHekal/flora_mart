@@ -31,8 +31,10 @@ Future<ApiResult<T>> executeApi<T>(Future<T> Function() apiCall) async {
               : ErrorModel(message: "Unknown error");
 
           if (responseCode != 0 && responseCode >= 400 && responseCode < 500) {
+            print("$responseCode");
             return ErrorApiResult(ClientError(message: errorModel.message));
           }
+
           if (responseCode != 0 && responseCode >= 500 && responseCode < 600) {
             return ErrorApiResult(ServerError(errorModel: errorModel));
           }
@@ -44,6 +46,7 @@ Future<ApiResult<T>> executeApi<T>(Future<T> Function() apiCall) async {
         }
     }
   } on Exception catch (ex) {
+    print(" $ex 😁🤑👆❤️⭐");
     return ErrorApiResult(ex);
   }
 }

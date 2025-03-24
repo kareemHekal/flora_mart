@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
     bool? rememberMe = CacheHelper.getData<bool>(CacheHelper.isRememberMe);
 
     String initialRoute(bool? rememberMe) {
-      print("$rememberMe 🤑🤑");
+      print(rememberMe);
       return rememberMe == true
           ? RouteManager.homeScreen
           : RouteManager.loginScreen;

@@ -112,12 +112,12 @@ class _SignInScreenState extends State<SignInScreen> {
                             fillColor: WidgetStateProperty.resolveWith<Color>(
                                 (Set<WidgetState> states) {
                               return isChecked
-                                  ? ColorManager.primaryColor
+                                  ? ColorManager.pinkBase
                                   : ColorManager.white;
                             }),
                             checkColor: isChecked
                                 ? ColorManager.white
-                                : ColorManager.primaryColor,
+                                : ColorManager.pinkBase,
                             value: isChecked,
                             onChanged: (bool? newValue) {
                               setState(() {
@@ -151,9 +151,9 @@ class _SignInScreenState extends State<SignInScreen> {
                     ],
                   ),
                   CustomTextButton(
-                    borderColor: ColorManager.primaryColor,
+                    borderColor: ColorManager.pinkBase,
                     text: AppStrings.login,
-                    color: ColorManager.primaryColor,
+                    color: ColorManager.pinkBase,
                     textColor: ColorManager.white,
                     onPressed: () {
                       _validateAndLogin(context);
@@ -166,17 +166,6 @@ class _SignInScreenState extends State<SignInScreen> {
                     textColor: ColorManager.grey,
                     onPressed: () {
                       _validateAndLogin(context);
-                    },
-                  ),
-                  CustomTextButton(
-                    borderColor: ColorManager.red,
-                    text: AppStrings.countinueAsGuest,
-                    color: ColorManager.white,
-                    textColor: ColorManager.grey,
-                    onPressed: () {
-                      bool? rememberMe =
-                          CacheHelper.getData<bool>(CacheHelper.isRememberMe);
-                      print("$rememberMe ");
                     },
                   ),
                   Row(
@@ -197,8 +186,8 @@ class _SignInScreenState extends State<SignInScreen> {
                           child: Text(
                             AppStrings.signUp,
                             style: TextStyle(
-                                decorationColor: ColorManager.primaryColor,
-                                color: ColorManager.primaryColor,
+                                decorationColor: ColorManager.pinkBase,
+                                color: ColorManager.pinkBase,
                                 fontWeight: FontWeight.bold,
                                 decoration: TextDecoration.underline,
                                 decorationThickness: 2.0),
