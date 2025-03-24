@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flora_mart/presentation/auth/register/view/register_screen.dart';
 import 'package:flora_mart/presentation/tabs/home_tab/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,8 +21,9 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           routes: {
             RouteManager.homeScreen: (context) => HomeTabScreen(),
+            RouteManager.registerScreen: (context) => RegisterScreen(),
           },
-          initialRoute: RouteManager.homeScreen,
+          initialRoute: RouteManager.registerScreen,
           theme: AppTheme.lightTheme,
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,
