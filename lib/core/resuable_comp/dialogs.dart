@@ -10,7 +10,7 @@ class Dialogs {
   // تابع تنفيذ العملية المسموحة
 // } or in widgets        isGuestUser ? Dialogs.showGuestRestrictionDialog(context) : performAllowedOperation();
 
-  static void restrictedAccess(BuildContext context) {
+  static void restrictedAccess(BuildContext context, VoidCallback backButton) {
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -32,9 +32,7 @@ class Dialogs {
           ),
           actions: [
             TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
+              onPressed: backButton,
               child:
                   Text(AppStrings.back, style: TextStyle(color: Colors.grey)),
             ),
