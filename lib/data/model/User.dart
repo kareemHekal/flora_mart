@@ -1,27 +1,20 @@
 class User {
-  String? sId;
-  String? firstName;
-  String? lastName;
-  String? email;
-  String? gender;
-  String? phone;
-  String? photo;
-  String? role;
-  String? createdAt;
+  User({
+    this.id,
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.gender,
+    this.phone,
+    this.photo,
+    this.role,
+    this.wishlist,
+    this.addresses,
+    this.createdAt,
+  });
 
-  User(
-      {this.sId,
-      this.firstName,
-      this.lastName,
-      this.email,
-      this.gender,
-      this.phone,
-      this.photo,
-      this.role,
-      this.createdAt});
-
-  User.fromJson(Map<String, dynamic> json) {
-    sId = json['_id'];
+  User.fromJson(dynamic json) {
+    id = json['_id'];
     firstName = json['firstName'];
     lastName = json['lastName'];
     email = json['email'];
@@ -29,20 +22,38 @@ class User {
     phone = json['phone'];
     photo = json['photo'];
     role = json['role'];
+    wishlist =
+        json['wishlist'] != null ? List<dynamic>.from(json['wishlist']) : [];
+    addresses =
+        json['addresses'] != null ? List<dynamic>.from(json['addresses']) : [];
     createdAt = json['createdAt'];
   }
 
+  String? id;
+  String? firstName;
+  String? lastName;
+  String? email;
+  String? gender;
+  String? phone;
+  String? photo;
+  String? role;
+  List<dynamic>? wishlist;
+  List<dynamic>? addresses;
+  String? createdAt;
+
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.sId;
-    data['firstName'] = this.firstName;
-    data['lastName'] = this.lastName;
-    data['email'] = this.email;
-    data['gender'] = this.gender;
-    data['phone'] = this.phone;
-    data['photo'] = this.photo;
-    data['role'] = this.role;
-    data['createdAt'] = this.createdAt;
-    return data;
+    final map = <String, dynamic>{};
+    map['_id'] = id;
+    map['firstName'] = firstName;
+    map['lastName'] = lastName;
+    map['email'] = email;
+    map['gender'] = gender;
+    map['phone'] = phone;
+    map['photo'] = photo;
+    map['role'] = role;
+    map['wishlist'] = wishlist;
+    map['addresses'] = addresses;
+    map['createdAt'] = createdAt;
+    return map;
   }
 }

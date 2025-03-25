@@ -15,8 +15,9 @@ class SigninRepoImpl implements LoginRepo {
   @override
   Future<ApiResult<UserModel>> login({
     required String email,
+    required bool rememberMe,
     required String password,
   }) async {
-    return loginDataSourceContract.login(email: email, password: password);
+    return loginDataSourceContract.login(rememberMe: rememberMe,email: email, password: password);
   }
 }

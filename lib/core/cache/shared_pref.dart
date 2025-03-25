@@ -1,11 +1,16 @@
+import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+@singleton
 class CacheHelper {
   static SharedPreferences? _sharedPrefs;
   // we can save the keys over here
   // so that we can use them in the app like this 👇👇
   static const String tokenKey = 'auth_token';
   static const String isRememberMe = 'isRememberMe';
+
+  CacheHelper(){
+    init();
+  }
 
   static Future<void> init() async {
     _sharedPrefs = await SharedPreferences.getInstance();
@@ -38,7 +43,7 @@ class CacheHelper {
   static T? getData<T>(String key) {
     if (_sharedPrefs == null) return null;
 
-    if (T == String || T == null) {
+    if (T == String) {
       return _sharedPrefs!.getString(key) as T?;
     } else if (T == bool) {
       return _sharedPrefs!.getBool(key) as T?;

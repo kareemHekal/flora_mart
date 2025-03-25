@@ -2,6 +2,7 @@ import 'package:flora_mart/core/api/api_excuter.dart';
 import 'package:flora_mart/core/api/api_manager.dart';
 import 'package:flora_mart/core/api/api_result.dart';
 import 'package:flora_mart/core/api/endpoints.dart';
+import 'package:flora_mart/core/cache/shared_pref.dart';
 import 'package:flora_mart/data/datasource_contract/Login_Data_Source_Repo.dart';
 import 'package:flora_mart/data/model/UserModel.dart';
 import 'package:injectable/injectable.dart';
@@ -16,6 +17,7 @@ class LoginDatasourceImpl implements LoginDataSourceRepo {
   @override
   Future<ApiResult<UserModel>> login({
     required String email,
+    required bool rememberMe,
     required String password,
   }) async {
     return await executeApi<UserModel>(
@@ -33,6 +35,26 @@ class LoginDatasourceImpl implements LoginDataSourceRepo {
         // Print full response
 
         var response = UserModel.fromJson(apiResponse.data ?? {});
+        // ============ Save Token ===============\\
+        if (response.token != null) {
+          bool setToken = await CacheHelper.setData<String>(
+              CacheHelper.tokenKey, response.token ?? "");
+          if (setToken) {
+            print('Token saved: ${response.token} ✅✅');
+            // ========== Remember me Token  ========= \\
+
+            bool setRememberMe = await CacheHelper.setData<bool>(
+                CacheHelper.isRememberMe, rememberMe ? rememberMe : false);
+
+            setRememberMe
+                ? print('isRememberMe saved: ${rememberMe} ✅✅')
+                : print('isRememberMe not saved⛔⛔, setting to null');
+            // ========== Remember me Token  ========= \\
+          } else {
+            print('Token not saved⛔⛔');
+          }
+        }
+        // ============ Save Token ===============\\
 
         return response;
       },

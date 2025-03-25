@@ -15,9 +15,10 @@ class LoginUsecase {
 
   Future<ApiResult<UserModel>> invoke({
     required String email,
+    required bool  rememberMe,
     required String password,
   }) async {
-    final result = await loginRepo.login(email: email, password: password);
+    final result = await loginRepo.login(rememberMe :rememberMe,email: email, password: password);
     return result;
   }
 }

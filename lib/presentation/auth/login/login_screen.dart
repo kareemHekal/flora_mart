@@ -29,13 +29,12 @@ class _SignInScreenState extends State<SignInScreen> {
   void _validateAndLogin(BuildContext context) {
     if (_formKey.currentState!.validate()) {
       context.read<LoginCubit>().doIntent(
-            SignInIntent(
-              rememberMe: isChecked,
-              email: emailController.text,
-              password: passwordController.text,
-              // Use the checkbox value
-            ),
-          );
+        SignInIntent(
+          rememberMe: isChecked,
+          email: emailController.text,
+          password: passwordController.text,
+        ),
+      );
     }
   }
 
@@ -52,152 +51,145 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     Config().init(context);
-    return BlocListener<LoginCubit, LoginStates>(
-      listener: (context, state) {
-        if (state is LoginSuccessState) {
-          Navigator.pushReplacementNamed(context, RouteManager.homeScreen);
-          toastMessage(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(AppStrings.login),
+      ),
+      body: BlocListener<LoginCubit, LoginStates>(
+        listener: (context, state) {
+          if (state is LoginSuccessState) {
+            Navigator.pushReplacementNamed(context, RouteManager.homeScreen);
+            toastMessage(
               message: AppStrings.loginSuccessfully,
-              tybeMessage: TybeMessage.positive);
-        }
-        if (state is LoginErrorState) {
-          toastMessage(
+              tybeMessage: TybeMessage.positive,
+            );
+          }
+          if (state is LoginErrorState) {
+            toastMessage(
               message: state.message.toString(),
-              tybeMessage: TybeMessage.negative);
-        }
-      },
-      child: Form(
-        key: _formKey,
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text(
-              AppStrings.login,
-            ),
-          ),
-          body: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisSize: MainAxisSize.min,
-                spacing: 10.h,
-                children: [
-                  CustomTextField(
-                      labelText: AppStrings.email,
-                      hintText: AppStrings.enterYourEmail,
-                      obscureText: false,
-                      controller: emailController,
-                      keyboard: TextInputType.emailAddress,
-                      validator: Validator.email),
-                  SizedBox(
-                    height: 4.h,
-                  ),
-                  CustomTextField(
-                      labelText: AppStrings.password,
-                      hintText: AppStrings.enterPassword,
-                      controller: passwordController,
-                      keyboard: TextInputType.visiblePassword,
-                      validator: Validator.password,
-                      obscureText: true),
-                  SizedBox(
-                    height: 4.h,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              tybeMessage: TybeMessage.negative,
+            );
+          }
+        },
+        child: BlocBuilder<LoginCubit, LoginStates>(
+          builder: (context, state) {
+            if (state is LoginLoadingState) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            return SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    spacing: 10,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
+                      CustomTextField(
+                        labelText: AppStrings.email,
+                        hintText: AppStrings.enterYourEmail,
+                        obscureText: false,
+                        controller: emailController,
+                        keyboard: TextInputType.emailAddress,
+                        validator: Validator.email,
+                      ),
+                      SizedBox(height: 4.h),
+                      CustomTextField(
+                        labelText: AppStrings.password,
+                        hintText: AppStrings.enterPassword,
+                        controller: passwordController,
+                        keyboard: TextInputType.visiblePassword,
+                        validator: Validator.password,
+                        obscureText: true,
+                      ),
+                      SizedBox(height: 4.h),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Checkbox(
-                            fillColor: WidgetStateProperty.resolveWith<Color>(
-                                (Set<WidgetState> states) {
-                              return isChecked
-                                  ? ColorManager.pinkBase
-                                  : ColorManager.white;
-                            }),
-                            checkColor: isChecked
-                                ? ColorManager.white
-                                : ColorManager.pinkBase,
-                            value: isChecked,
-                            onChanged: (bool? newValue) {
-                              setState(() {
-                                isChecked = newValue ?? false;
-                              });
-                            },
+                          Row(
+                            children: [
+                              Checkbox(
+                                fillColor: WidgetStateProperty.resolveWith<Color>(
+                                      (Set<WidgetState> states) {
+                                    return isChecked ? ColorManager.pinkBase : ColorManager.white;
+                                  },
+                                ),
+                                checkColor: isChecked ? ColorManager.white : ColorManager.pinkBase,
+                                value: isChecked,
+                                onChanged: (bool? newValue) {
+                                  setState(() {
+                                    isChecked = newValue ?? false;
+                                  });
+                                },
+                              ),
+                              SizedBox(width: 2.w),
+                              Text(
+                                AppStrings.rememberMe,
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
+                            ],
                           ),
-
-                          SizedBox(width: 2.w),
-                          // إضافة مسافة صغيرة بين المربع والنص
-                          Text(
-                            AppStrings.rememberMe,
-                            style: Theme.of(context).textTheme.bodyMedium,
+                          InkWell(
+                            onTap: () {},
+                            child: Text(
+                              AppStrings.forgetpassword,
+                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                decoration: TextDecoration.underline,
+                                decorationThickness: 2.0,
+                              ),
+                            ),
                           ),
                         ],
                       ),
-                      InkWell(
-                          onTap: () {
-                            // Navigator.pushNamed(
-                            //     context, RouteManager.forgetPassScreen);
-                          },
-                          child: Text(
-                            AppStrings.forgetpassword,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium
-                                ?.copyWith(
-                                    decoration: TextDecoration.underline,
-                                    decorationThickness: 2.0),
-                          ))
-                    ],
-                  ),
-                  CustomTextButton(
-                    borderColor: ColorManager.pinkBase,
-                    text: AppStrings.login,
-                    color: ColorManager.pinkBase,
-                    textColor: ColorManager.white,
-                    onPressed: () {
-                      _validateAndLogin(context);
-                    },
-                  ),
-                  CustomTextButton(
-                    borderColor: ColorManager.grey,
-                    text: AppStrings.countinueAsGuest,
-                    color: ColorManager.white,
-                    textColor: ColorManager.grey,
-                    onPressed: () {
-                      _validateAndLogin(context);
-                    },
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        AppStrings.dontHaveAccount,
-                        style: Theme.of(context).textTheme.bodyMedium,
+                      CustomTextButton(
+                        borderColor: ColorManager.pinkBase,
+                        text: AppStrings.login,
+                        color: ColorManager.pinkBase,
+                        textColor: ColorManager.white,
+                        onPressed: () {
+                          _validateAndLogin(context);
+                        },
                       ),
-                      SizedBox(
-                        width: 5.w,
+                      CustomTextButton(
+                        borderColor: ColorManager.grey,
+                        text: AppStrings.countinueAsGuest,
+                        color: ColorManager.white,
+                        textColor: ColorManager.grey,
+                        onPressed: () {
+                          _validateAndLogin(context);
+                        },
                       ),
-                      InkWell(
-                          onTap: () {
-                            // Navigator.pushNamed(
-                            //     context, RouteManager.signUpscreen);
-                          },
-                          child: Text(
-                            AppStrings.signUp,
-                            style: TextStyle(
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            AppStrings.dontHaveAccount,
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                          SizedBox(width: 5.w),
+                          InkWell(
+                            onTap: () {},
+                            child: Text(
+                              AppStrings.signUp,
+                              style: TextStyle(
                                 decorationColor: ColorManager.pinkBase,
                                 color: ColorManager.pinkBase,
                                 fontWeight: FontWeight.bold,
                                 decoration: TextDecoration.underline,
-                                decorationThickness: 2.0),
-                          )),
+                                decorationThickness: 2.0,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
-                  )
-                ],
+                  ),
+                ),
               ),
-            ),
-          ),
+            );
+          },
         ),
       ),
     );

@@ -14,7 +14,6 @@ void main() async {
   configureDependencies();
   Bloc.observer = MyBlocObserver();
   ApiManager.init();
-  await CacheHelper.init();
   runApp(EasyLocalization(
       supportedLocales: [Locale('en'), Locale('ar')],
       path:

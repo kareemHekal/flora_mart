@@ -9,7 +9,10 @@ Future<ApiResult<T>> executeApi<T>(Future<T> Function() apiCall) async {
   try {
     var result = await apiCall.call();
     return SuccessApiResult(result);
-  } on DioException catch (ex) {
+  }
+
+
+  on DioException catch (ex) {
     var errorModel = ErrorModel.fromJson(ex.response?.data);
     log(errorModel.message.toString());
     switch (ex.type) {
