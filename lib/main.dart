@@ -1,5 +1,8 @@
+
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flora_mart/presentation/auth/forget_password/view/forget_password/view_model/auth_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/api/api_manager.dart';
 import 'core/di/di.dart';
@@ -15,8 +18,11 @@ void main() async {
   runApp(EasyLocalization(
       supportedLocales: [Locale('en'), Locale('ar')],
       path:
-          'assets/translations', // <-- change the path of the translation files
+      'assets/translations', // <-- change the path of the translation files
       fallbackLocale: Locale('en'),
       startLocale: Locale("en"),
-      child: MyApp()));
+      child: BlocProvider<AuthCubit>(
+        create: (context) => getIt<AuthCubit>(),
+        child: MyApp(),
+      )));
 }

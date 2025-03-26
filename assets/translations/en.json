@@ -16,5 +16,29 @@
   "lastNameCannotBeMoreThan20Characters": "Last name cannot be more than 20 characters",
   "phoneNumberCannotBeEmpty": "Phone number cannot be empty",
   "phoneNumberCannotBeMoreThan20Characters": "Phone number cannot be more than 20 characters",
-  "passwordMustContainAtLeastOneSpecialCharacter": "Password must contain at least one special character"
+  "passwordMustContainAtLeastOneSpecialCharacter": "Password must contain at least one special character",
+
+
+  "password": "Password",
+  "email": "Email",
+  "enterYourEmail": "Enter you email",
+  "notValidEmail": "Dont't valid account",
+  "forgetPassword": "Forget password",
+  "enterYourForgetPassword": "Enter Your email",
+  "resetPassword": "Reset password",
+  "newPassword": "New password",
+  "enterYourNewPassword": "Enter your new password",
+  "enterYourPassword": "Enter your password",
+  "confirmPassword": "Confirm password",
+  "currentPassword": "Current password",
+  "confirm": "Confirm",
+  "pleaseEnterEmailsAssociatedToUrAccount": "Please enter your email associated \nto your account",
+  "forgetpassword": "Forgetpassword",
+  "emailVerification": "EmailVerification",
+  "sendedCode": "Please enter your code that send to your \nemail address ",
+  "dontRecieveCode": "Didn't Recieve Code?",
+  "resend": "Resend",
+  "continueText": "continue",
+  "resetText": "Password must not be empty and must contain \n6 characters with upper case letter and one \nnumber at least ",
+  "passwordvalid": "passwordvalid"
 }

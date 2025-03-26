@@ -16,5 +16,29 @@
   "lastNameCannotBeMoreThan20Characters": "لا يمكن أن يكون الاسم الأخير أكثر من 20 حرفًا",
   "phoneNumberCannotBeEmpty": "لا يمكن أن يكون رقم الهاتف فارغًا",
   "phoneNumberCannotBeMoreThan20Characters": "لا يمكن أن يكون رقم الهاتف أكثر من 20 حرفًا",
-  "passwordMustContainAtLeastOneSpecialCharacter": "يجب أن تحتوي كلمة المرور على رمز خاص واحد على الأقل"
+  "passwordMustContainAtLeastOneSpecialCharacter": "يجب أن تحتوي كلمة المرور على رمز خاص واحد على الأقل",
+
+  "password": "كلمة المرور",
+  "email": "البريد الإلكتروني",
+  "enterYourEmail": "أدخل بريدك الإلكتروني",
+  "notValidEmail": "الحساب غير صالح",
+  "forgetPassword": "نسيت كلمة المرور",
+  "enterYourForgetPassword": "أدخل بريدك الإلكتروني",
+  "resetPassword": "إعادة تعيين كلمة المرور",
+  "newPassword": "كلمة المرور الجديدة",
+  "enterYourNewPassword": "أدخل كلمة المرور الجديدة",
+  "enterYourPassword": "أدخل كلمة المرور",
+  "confirmPassword": "تأكيد كلمة المرور",
+  "currentPassword": "كلمة المرور الحالية",
+  "confirm": "تأكيد",
+  "pleaseEnterEmailsAssociatedToUrAccount": "يرجى إدخال البريد الإلكتروني المرتبط \nبحسابك",
+  "forgetpassword": "نسيت كلمة المرور",
+  "emailVerification": "التحقق من البريد الإلكتروني",
+  "sendedCode": "يرجى إدخال الرمز المرسل إلى \nبريدك الإلكتروني",
+  "dontRecieveCode": "لم تستلم الرمز؟",
+  "resend": "إعادة الإرسال",
+  "continueText": "متابعة",
+  "resetText": "يجب ألا تكون كلمة المرور فارغة ويجب أن تحتوي \nعلى 6 أحرف على الأقل مع حرف كبير ورقم واحد على الأقل",
+  "passwordvalid": "كلمة المرور غير صالحة"
+
 }
