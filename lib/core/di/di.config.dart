@@ -16,22 +16,26 @@ import '../../data/datasource_contract/auth_datasource.dart' as _i214;
 import '../../data/datasource_impl/auth_datasource_impl.dart' as _i422;
 import '../../data/repo_impl/auth_repo_impl.dart' as _i540;
 import '../../domain/repo_contract/auth_repo.dart' as _i233;
+import '../../presentation/auth/view_model/cubit/auth_cubit.dart' as _i351;
 import '../api/api_manager.dart' as _i1047;
 
 extension GetItInjectableX on _i174.GetIt {
-  // initializes the registration of main-scope dependencies inside of GetIt
+// initializes the registration of main-scope dependencies inside of GetIt
   _i174.GetIt init({
     String? environment,
     _i526.EnvironmentFilter? environmentFilter,
   }) {
-    final gh = _i526.GetItHelper(this, environment, environmentFilter);
+    final gh = _i526.GetItHelper(
+      this,
+      environment,
+      environmentFilter,
+    );
+    gh.factory<_i351.AuthCubit>(() => _i351.AuthCubit());
     gh.singleton<_i1047.ApiManager>(() => _i1047.ApiManager());
     gh.factory<_i214.AuthDatasource>(
-      () => _i422.AuthDatasourceImpl(gh<_i1047.ApiManager>()),
-    );
+        () => _i422.AuthDatasourceImpl(gh<_i1047.ApiManager>()));
     gh.factory<_i233.AuthRepo>(
-      () => _i540.AuthRepoImpl(gh<_i214.AuthDatasource>()),
-    );
+        () => _i540.AuthRepoImpl(gh<_i214.AuthDatasource>()));
     return this;
   }
 }
