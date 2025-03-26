@@ -38,6 +38,9 @@ dependencies:
   provider: any
   bloc: any
   injectable: any
+  mockito: ^5.4.5
+  bloc_test: ^10.0.0
+  build_runner: any
   # add get_it
   get_it:
   flutter_svg: any

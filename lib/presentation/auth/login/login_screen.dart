@@ -1,4 +1,5 @@
 import 'package:flora_mart/core/cache/shared_pref.dart';
+import 'package:flora_mart/core/constant.dart';
 import 'package:flora_mart/core/resuable_comp/custom_text_field.dart';
 import 'package:flora_mart/core/resuable_comp/text_button.dart';
 import 'package:flora_mart/core/resuable_comp/toast_message.dart';
@@ -45,7 +46,7 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   void setTokenNull() async {
-    await CacheHelper.removeData(CacheHelper.tokenKey);
+    await CacheHelper.removeData(Constant.tokenKey);
   }
 
   @override

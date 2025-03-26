@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flora_mart/core/cache/shared_pref.dart';
+import 'package:flora_mart/core/constant.dart';
 import 'package:flora_mart/presentation/auth/login/cubit/Login_cubit.dart';
 import 'package:flora_mart/presentation/auth/login/login_screen.dart';
 import 'package:flora_mart/presentation/tabs/home_tab/home_screen.dart';
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool? rememberMe = CacheHelper.getData<bool>(CacheHelper.isRememberMe);
+    bool? rememberMe = CacheHelper.getData<bool>(Constant.isRememberMe);
 
     String initialRoute(bool? rememberMe) {
       print(rememberMe);

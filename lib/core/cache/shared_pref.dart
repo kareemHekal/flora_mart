@@ -5,13 +5,14 @@ class CacheHelper {
   static SharedPreferences? _sharedPrefs;
   // we can save the keys over here
   // so that we can use them in the app like this 👇👇
-  static const String tokenKey = 'auth_token';
-  static const String isRememberMe = 'isRememberMe';
+
 
   CacheHelper(){
     init();
   }
-
+  static void initForTest(SharedPreferences prefs) {
+    _sharedPrefs = prefs;
+  }
   static Future<void> init() async {
     _sharedPrefs = await SharedPreferences.getInstance();
   }

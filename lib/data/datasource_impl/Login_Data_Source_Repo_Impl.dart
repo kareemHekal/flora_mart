@@ -3,6 +3,7 @@ import 'package:flora_mart/core/api/api_manager.dart';
 import 'package:flora_mart/core/api/api_result.dart';
 import 'package:flora_mart/core/api/endpoints.dart';
 import 'package:flora_mart/core/cache/shared_pref.dart';
+import 'package:flora_mart/core/constant.dart';
 import 'package:flora_mart/data/datasource_contract/Login_Data_Source_Repo.dart';
 import 'package:flora_mart/data/model/UserModel.dart';
 import 'package:injectable/injectable.dart';
@@ -38,13 +39,13 @@ class LoginDatasourceImpl implements LoginDataSourceRepo {
         // ============ Save Token ===============\\
         if (response.token != null) {
           bool setToken = await CacheHelper.setData<String>(
-              CacheHelper.tokenKey, response.token ?? "");
+              Constant.tokenKey, response.token ?? "");
           if (setToken) {
             print('Token saved: ${response.token} ✅✅');
             // ========== Remember me Token  ========= \\
 
             bool setRememberMe = await CacheHelper.setData<bool>(
-                CacheHelper.isRememberMe, rememberMe ? rememberMe : false);
+                Constant.isRememberMe, rememberMe ? rememberMe : false);
 
             setRememberMe
                 ? print('isRememberMe saved: ${rememberMe} ✅✅')
