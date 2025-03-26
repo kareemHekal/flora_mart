@@ -1,6 +1,7 @@
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flora_mart/presentation/auth/forget_password/view/forget_password/view_model/auth_cubit.dart';
+import 'package:flora_mart/presentation/auth/view_model/cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
