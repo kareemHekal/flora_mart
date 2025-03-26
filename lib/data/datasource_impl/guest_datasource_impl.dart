@@ -3,21 +3,18 @@ import 'package:flora_mart/core/constant.dart';
 import 'package:flora_mart/domain/common/result.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../core/api/api_manager.dart';
 import '../datasource_contract/guest_datasource.dart';
 
 @Injectable(as: GuestDatasource)
 class GuestDatasourceImpl extends GuestDatasource {
-  ApiManager apiManager;
+  final CacheHelper cacheHelper;
   @factoryMethod
-  GuestDatasourceImpl(
-    this.apiManager,
-  );
+  GuestDatasourceImpl(this.cacheHelper);
 
   @override
   Future<Result<bool>> checkGuest() async {
     try {
-      var result = await CacheHelper.checkGuest();
+      var result = await cacheHelper.checkGuest();
       return Success(result);
     } catch (error) {
       return Error(Exception(error.toString()));
@@ -26,6 +23,6 @@ class GuestDatasourceImpl extends GuestDatasource {
 
   @override
   Future<bool> changeGuest({required bool isGuest}) async {
-    return await CacheHelper.setData(Constant.questCacheKey, isGuest);
+    return await cacheHelper.setData(Constant.questCacheKey, isGuest);
   }
 }

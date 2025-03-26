@@ -15,19 +15,19 @@ class CacheHelper {
     log("Constructor called shared prefs");
   }
 
-  static Future<void> init() async {
+  Future<void> init() async {
     _sharedPrefs = await SharedPreferences.getInstance();
     await setData<bool>(Constant.questCacheKey, false);
     log("initialized shared prefs");
   }
 
-  static Future<void> _ensureInitialized() async {
+  Future<void> _ensureInitialized() async {
     if (_sharedPrefs == null) {
       await init();
     }
   }
 
-  static Future<bool> checkGuest() async {
+  Future<bool> checkGuest() async {
     try {
       await _ensureInitialized();
       var guest = _sharedPrefs!.getBool(Constant.questCacheKey);
@@ -44,7 +44,7 @@ class CacheHelper {
 
   //========USAGE=========\\
   /// bool set = await CacheHelper.setData<String>("token", response.data['token']);
-  static Future<bool> setData<T>(String key, T value) async {
+  Future<bool> setData<T>(String key, T value) async {
     await _ensureInitialized();
     if (value is String) {
       return await _sharedPrefs!.setString(key, value);
@@ -63,7 +63,7 @@ class CacheHelper {
 
   //========USAGE=========\\
   /// String? token = CacheHelper.getData<String>("token");
-  static Future<T?> getData<T>(String key) async {
+  Future<T?> getData<T>(String key) async {
     await _ensureInitialized();
 
     if (T == String) {
@@ -81,7 +81,7 @@ class CacheHelper {
     }
   }
 
-  static Future<bool> removeData(String key) async {
+  Future<bool> removeData(String key) async {
     await _ensureInitialized();
     return await _sharedPrefs!.remove(key);
   }

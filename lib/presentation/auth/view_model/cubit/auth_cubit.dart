@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flora_mart/domain/common/result.dart';
 import 'package:flora_mart/domain/usecase/changeGuest_usecase.dart';
-import 'package:flora_mart/domain/usecase/checkGuest_usecase.dart';
+import 'package:flora_mart/domain/usecase/check_guest_usecase.dart';
 import 'package:flora_mart/presentation/auth/view_model/cubit/auth_intent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
