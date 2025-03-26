@@ -10,3 +10,11 @@ class SignInIntent extends AuthIntent {
     required this.password,
   });
 }
+
+class CheckGuestIntent extends AuthIntent {}
+
+class ChangeGuestIntent extends AuthIntent {
+  final bool isGuest;
+
+  ChangeGuestIntent({required this.isGuest});
+}

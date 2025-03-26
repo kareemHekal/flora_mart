@@ -7,4 +7,5 @@ class Constant {
   static RegExp regexPass = RegExp(
     r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$',
   );
+  static const String questCacheKey = "is_quest";
 }

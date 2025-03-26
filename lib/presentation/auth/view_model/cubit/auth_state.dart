@@ -20,3 +20,8 @@ final class LoginErrorState extends AuthState {
 
   LoginErrorState({required this.message});
 }
+
+final class CeckGuestState extends AuthState {
+  final bool isGuest;
+  CeckGuestState(this.isGuest);
+}
