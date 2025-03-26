@@ -1,20 +1,51 @@
+import 'dart:developer';
+
+import 'package:flora_mart/core/constant.dart';
+import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+@singleton
 class CacheHelper {
   static SharedPreferences? _sharedPrefs;
   // we can save the keys over here
   // so that we can use them in the app like this 👇👇
   //  >>  static const String _tokenKey = 'auth_token';
+  CacheHelper() {
+    init();
+    log("Constructor called shared prefs");
+  }
 
-  static Future<void> init() async {
+  Future<void> init() async {
     _sharedPrefs = await SharedPreferences.getInstance();
+    await setData<bool>(Constant.questCacheKey, false);
+    log("initialized shared prefs");
+  }
+
+  Future<void> _ensureInitialized() async {
+    if (_sharedPrefs == null) {
+      await init();
+    }
+  }
+
+  Future<bool> checkGuest() async {
+    try {
+      await _ensureInitialized();
+      var guest = _sharedPrefs!.getBool(Constant.questCacheKey);
+      if (guest == true) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      log("CacheHelper.isQuest() error: $e");
+      return false;
+    }
   }
 
   //========USAGE=========\\
   /// bool set = await CacheHelper.setData<String>("token", response.data['token']);
-  static Future<bool> setData<T>(String key, T value) async {
-    if (_sharedPrefs == null) await init();
-
+  Future<bool> setData<T>(String key, T value) async {
+    await _ensureInitialized();
     if (value is String) {
       return await _sharedPrefs!.setString(key, value);
     } else if (value is bool) {
@@ -32,10 +63,10 @@ class CacheHelper {
 
   //========USAGE=========\\
   /// String? token = CacheHelper.getData<String>("token");
-  static T? getData<T>(String key) {
-    if (_sharedPrefs == null) return null;
+  Future<T?> getData<T>(String key) async {
+    await _ensureInitialized();
 
-    if (T == String || T == null) {
+    if (T == String) {
       return _sharedPrefs!.getString(key) as T?;
     } else if (T == bool) {
       return _sharedPrefs!.getBool(key) as T?;
@@ -50,8 +81,8 @@ class CacheHelper {
     }
   }
 
-  static Future<bool> removeData(String key) async {
-    if (_sharedPrefs == null) await init();
+  Future<bool> removeData(String key) async {
+    await _ensureInitialized();
     return await _sharedPrefs!.remove(key);
   }
 }
