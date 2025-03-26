@@ -10,8 +10,8 @@ import '../../../../../../core/resuable_comp/validator.dart';
 import '../../../../../../core/utils/config.dart';
 import '../../../../../../core/utils/string_manager.dart';
 import '../../../../../../core/utils/text_style_manager.dart';
-import '../view_model/auth_cubit.dart';
-import '../view_model/auth_intent.dart';
+import '../../../../view_model/cubit/auth_cubit.dart';
+import '../../../../view_model/cubit/auth_intent.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   static const routeName = '/PutNewPassword';
