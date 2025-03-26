@@ -1,11 +1,10 @@
 import 'dart:async';
-
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flora_mart/core/api/api_result.dart';
 import 'package:flora_mart/data/model/UserModel.dart';
 import 'package:flora_mart/domain/usecase/login_Usecase.dart';
-import 'package:flora_mart/presentation/auth/login/cubit/Login_cubit.dart';
-import 'package:flora_mart/presentation/auth/login/cubit/Login_intent.dart';
+import 'package:flora_mart/presentation/auth/view_model/cubit/auth_cubit.dart';
+import 'package:flora_mart/presentation/auth/view_model/cubit/auth_intent.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
@@ -19,12 +18,12 @@ void main() {
   ApiResult<UserModel> userModelApiResult =SuccessApiResult(testUserModel);
   provideDummy<ApiResult<UserModel>>(SuccessApiResult<UserModel>(null));
 
-  late LoginCubit loginCubit;
+  late AuthCubit loginCubit;
   late MockLoginUsecase mockLoginUsecase;
 
   setUp(() {
     mockLoginUsecase = MockLoginUsecase();
-    loginCubit = LoginCubit(signinUsecase: mockLoginUsecase);
+    loginCubit = AuthCubit( mockLoginUsecase);
 
     // Stub the invoke method to return a successful login result
     when(mockLoginUsecase.invoke(
@@ -44,7 +43,7 @@ void main() {
     const testPassword = 'password123';
     const testRememberMe = true;
 
-    blocTest<LoginCubit, LoginStates>(
+    blocTest<AuthCubit, AuthState>(
       'emits [LoginLoading, LoginSuccess] when sign in succeeds',
       build: () => loginCubit,
       act: (cubit) => cubit.doIntent(

@@ -8,8 +8,8 @@ import 'package:flora_mart/core/utils/colors_manager.dart';
 import 'package:flora_mart/core/utils/config.dart';
 import 'package:flora_mart/core/utils/routes_manager.dart';
 import 'package:flora_mart/core/utils/string_manager.dart';
-import 'package:flora_mart/presentation/auth/login/cubit/Login_cubit.dart';
-import 'package:flora_mart/presentation/auth/login/cubit/Login_intent.dart';
+import 'package:flora_mart/presentation/auth/view_model/cubit/auth_cubit.dart';
+import 'package:flora_mart/presentation/auth/view_model/cubit/auth_intent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,7 +29,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   void _validateAndLogin(BuildContext context) {
     if (_formKey.currentState!.validate()) {
-      context.read<LoginCubit>().doIntent(
+      context.read<AuthCubit>().doIntent(
         SignInIntent(
           rememberMe: isChecked,
           email: emailController.text,
@@ -56,7 +56,7 @@ class _SignInScreenState extends State<SignInScreen> {
       appBar: AppBar(
         title: Text(AppStrings.login),
       ),
-      body: BlocListener<LoginCubit, LoginStates>(
+      body: BlocListener<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is LoginSuccessState) {
             Navigator.pushReplacementNamed(context, RouteManager.homeScreen);
@@ -72,7 +72,7 @@ class _SignInScreenState extends State<SignInScreen> {
             );
           }
         },
-        child: BlocBuilder<LoginCubit, LoginStates>(
+        child: BlocBuilder<AuthCubit, AuthState>(
           builder: (context, state) {
             if (state is LoginLoadingState) {
               return const Center(child: CircularProgressIndicator());

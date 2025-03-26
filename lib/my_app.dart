@@ -1,15 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flora_mart/core/cache/shared_pref.dart';
 import 'package:flora_mart/core/constant.dart';
-import 'package:flora_mart/presentation/auth/login/cubit/Login_cubit.dart';
 import 'package:flora_mart/presentation/auth/login/login_screen.dart';
 import 'package:flora_mart/presentation/tabs/home_tab/home_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'config/theme/app_theme.dart';
-import 'core/di/di.dart';
 import 'core/utils/routes_manager.dart';
 
 class MyApp extends StatelessWidget {
@@ -35,10 +31,8 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           routes: {
             RouteManager.homeScreen: (context) => HomeTabScreen(),
-            RouteManager.loginScreen: (context) => BlocProvider(
-                  create: (context) => getIt<LoginCubit>(),
-                  child: SignInScreen(),
-                ),
+            RouteManager.loginScreen: (context) => SignInScreen(),
+
           },
           initialRoute: initialRoute(rememberMe),
           theme: AppTheme.lightTheme,
