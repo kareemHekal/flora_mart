@@ -39,7 +39,7 @@ class AuthCubit extends Cubit<AuthState> {
      this.forgetPasswordUseCase,
      this.checkGuestUseCase,
      this.changeGuestUsecase,
-  , this.registerUsecase
+  this.registerUsecase
   ) : super(AuthInitial());
 
 
@@ -145,9 +145,6 @@ class AuthCubit extends Cubit<AuthState> {
         }
     }
   }
-}
-
-
   _register({required RegisterUserIntent intent}) async {
     emit(RegisterViewModelLoading());
 
@@ -162,8 +159,10 @@ class AuthCubit extends Cubit<AuthState> {
     );
 
     result.fold(
-      (failureMessage) => emit(RegisterViewModelFailure(failureMessage)),
-      (response) => emit(RegisterViewModelSuccess(response)),
+          (failureMessage) => emit(RegisterViewModelFailure(failureMessage)),
+          (response) => emit(RegisterViewModelSuccess(response)),
     );
   }
 }
+
+

@@ -62,14 +62,10 @@ class AppStrings {
   static String get invalidFirstName => "invalidFirstName".tr();
   static String get lastName => "lastName".tr();
   static String get enterLastName => "enterLastName".tr();
-  static String get email => "email".tr();
-  static String get enterYourEmail => "enterYourEmail".tr();
   static String get invalidEmail => "invalidEmail".tr();
-  static String get password => "password".tr();
   static String get enterPassword => "enterPassword".tr();
   static String get pleaseEnterAPassword => "pleaseEnterAPassword".tr();
   static String get pleaseEnterACorrectPassword => "pleaseEnterACorrectPassword(e.g.,Elevet@123)".tr();
-  static String get confirmPassword => "confirmPassword".tr();
   static String get pleaseEnterYourPasswordConfirmation => "pleaseEnterYourPasswordConfirmation".tr();
   static String get phoneNumber => "phoneNumber".tr();
   static String get enterPhoneNumber => "enterPhoneNumber".tr();

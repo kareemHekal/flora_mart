@@ -30,13 +30,8 @@ class UserEntity {
   String? id;
   List<dynamic>? addresses;
   String? createdAt;
-  String? id;
   String? username;
-  String? firstName;
-  String? lastName;
-  String? email;
-  String? phone;
-  String? role;
+
   UserEntity({
     this.id,
     this.username,
@@ -47,17 +42,10 @@ class UserEntity {
     this.phone,
     this.photo,
     this.role,
-
     this.wishlist,
-    this.id,
     this.addresses,
     this.createdAt,
   });
 }
 
 
-
-
-
-
-}
