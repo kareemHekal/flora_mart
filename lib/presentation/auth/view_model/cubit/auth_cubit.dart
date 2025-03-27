@@ -32,7 +32,6 @@ part 'auth_state.dart';
 
 @injectable
 class AuthCubit extends Cubit<AuthState> {
-
   final RegisterUsecase registerUsecase;
   @factoryMethod
   final CheckGuestUseCase checkGuestUseCase;
@@ -45,16 +44,14 @@ class AuthCubit extends Cubit<AuthState> {
   final cacheHelper = getIt<CacheHelper>();
 
   AuthCubit(
-     this.verifyresetcodeUseCase,
-     this.resetpasswordUsecase,
-     this.forgetPasswordUseCase,
-     this.checkGuestUseCase,
-     this.changeGuestUsecase,
+      this.verifyresetcodeUseCase,
+      this.resetpasswordUsecase,
+      this.forgetPasswordUseCase,
+      this.checkGuestUseCase,
+      this.changeGuestUsecase,
       this.registerUsecase,
-  ,
-  this.signInUsecase
-  ) : super(AuthInitial());
-
+      this.signInUsecase)
+      : super(AuthInitial());
 
   void doIntent(AuthIntent authIntent) {
     switch (authIntent) {
@@ -199,6 +196,7 @@ class AuthCubit extends Cubit<AuthState> {
         }
     }
   }
+
   _register({required RegisterUserIntent intent}) async {
     emit(RegisterViewModelLoading());
 
@@ -213,10 +211,8 @@ class AuthCubit extends Cubit<AuthState> {
     );
 
     result.fold(
-          (failureMessage) => emit(RegisterViewModelFailure(failureMessage)),
-          (response) => emit(RegisterViewModelSuccess(response)),
+      (failureMessage) => emit(RegisterViewModelFailure(failureMessage)),
+      (response) => emit(RegisterViewModelSuccess(response)),
     );
   }
 }
-
-

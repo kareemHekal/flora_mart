@@ -110,15 +110,12 @@ class AppStrings {
 
   static String get passwordvalid => "passwordvalid".tr();
 
-
-  static String get signUp => "signUp".tr();
   static String get firstName => "firstName".tr();
   static String get enterFirstName => "enterFirstName".tr();
   static String get invalidFirstName => "invalidFirstName".tr();
   static String get lastName => "lastName".tr();
   static String get enterLastName => "enterLastName".tr();
   static String get invalidEmail => "invalidEmail".tr();
-  static String get enterPassword => "enterPassword".tr();
   static String get pleaseEnterAPassword => "pleaseEnterAPassword".tr();
   static String get pleaseEnterACorrectPassword => "pleaseEnterACorrectPassword(e.g.,Elevet@123)".tr();
   static String get pleaseEnterYourPasswordConfirmation => "pleaseEnterYourPasswordConfirmation".tr();

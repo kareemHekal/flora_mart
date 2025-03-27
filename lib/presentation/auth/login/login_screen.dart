@@ -175,7 +175,10 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                           SizedBox(width: 5.w),
                           InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.pushReplacementNamed(context, RouteManager.registerScreen);
+
+                            },
                             child: Text(
                               AppStrings.signUp,
                               style: TextStyle(
