@@ -16,6 +16,16 @@
   "lastNameCannotBeMoreThan20Characters": "Last name cannot be more than 20 characters",
   "phoneNumberCannotBeEmpty": "Phone number cannot be empty",
   "phoneNumberCannotBeMoreThan20Characters": "Phone number cannot be more than 20 characters",
+
+  "passwordMustContainAtLeastOneSpecialCharacter": "Password must contain at least one special character",
+  "navigation": {
+    "home": "Home",
+    "category": "Category",
+    "cart": "Cart",
+    "profile": "Profile"
+  }
+}
+
   "loginSuccessfully": "Login Successfully",
   "rememberMe": "Remember me",
   "countinueAsGuest": "Continue as Guest",
@@ -70,3 +80,4 @@
   "terms&Conditions": "Terms & Conditions",
   "alreadyHaveAnAccount?": "Already have an account?"
 }
+
