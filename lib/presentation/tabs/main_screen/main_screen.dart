@@ -4,6 +4,7 @@ import 'package:flora_mart/presentation/tabs/categories_tab/categories_screen.da
 import 'package:flora_mart/presentation/tabs/cart_tab/cart_screen.dart';
 import 'package:flora_mart/presentation/tabs/profile_tab/profile_screen.dart';
 import 'package:flora_mart/core/utils/colors_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -38,22 +39,22 @@ class _MainScreenState extends State<MainScreen> {
           highlightColor: Colors.transparent,
         ),
         child: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
+          items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
-              label: 'Home',
+              label: 'navigation.home'.tr(), // Using translation key
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.category_outlined),
-              label: 'Category',
+              label: 'navigation.category'.tr(), // Using translation key
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.shopping_cart_outlined),
-              label: 'Cart',
+              label: 'navigation.cart'.tr(), // Using translation key
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person_outline),
-              label: 'Profile',
+              label: 'navigation.profile'.tr(), // Using translation key
             ),
           ],
           currentIndex: _selectedIndex,
