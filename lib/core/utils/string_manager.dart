@@ -33,10 +33,6 @@ class AppStrings {
   static String get guestRestrictionMessage => "guestRestrictionMessage".tr();
   static String get back => "back".tr();
   static String get login => "login".tr();
-  static String get phoneNumberCannotBeMoreThan20Characters =>
-      "phoneNumberCannotBeMoreThan20Characters".tr();
-  static String get passwordMustContainAtLeastOneSpecialCharacter =>
-      "passwordMustContainAtLeastOneSpecialCharacter".tr();
 
   static String get password => "password";
 

@@ -30,6 +30,7 @@ part 'auth_state.dart';
 
 @injectable
 class AuthCubit extends Cubit<AuthState> {
+  @factoryMethod
   final CheckGuestUseCase checkGuestUseCase;
   final ChangeguestUsecase changeGuestUsecase;
   final LoginUsecase signInUsecase;
@@ -40,20 +41,13 @@ class AuthCubit extends Cubit<AuthState> {
   final cacheHelper = getIt<CacheHelper>();
   AuthCubit(
      this.verifyresetcodeUseCase,
-    this.signInUsecase
      this.resetpasswordUsecase,
      this.forgetPasswordUseCase,
      this.checkGuestUseCase,
      this.changeGuestUsecase
+  this.signInUsecase
   ) : super(AuthInitial());
 
-  @factoryMethod
-  final LoginUsecase signInUsecase;
-  String? startRoute;
-  final cacheHelper = getIt<CacheHelper>();
-
-  AuthCubit(this.signInUsecase, this.checkGuestUseCase, this.changeGuestUsecase)
-      : super(AuthInitial());
 
   void doIntent(AuthIntent authIntent) {
     switch (authIntent) {
@@ -67,13 +61,13 @@ class AuthCubit extends Cubit<AuthState> {
         _changeGuest(intent: authIntent);
         break;
       case ForgetPassword():
-        _ForgetPassword(intent: intent);
+        _ForgetPassword(intent: authIntent);
         break;
       case VerifyResetCode():
-        _VerifyResetCode(intent: intent);
+        _VerifyResetCode(intent: authIntent);
         break;
       case ResetPassword():
-        _ResetPassword(intent: intent);
+        _ResetPassword(intent: authIntent);
         break;
       case CheckAuthIntent():
         _CheekAuth();
@@ -194,3 +188,4 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 }
+
