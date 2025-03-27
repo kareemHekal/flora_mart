@@ -5,8 +5,10 @@ import 'package:flora_mart/core/constant.dart';
 import 'package:flora_mart/core/di/di.dart';
 import 'package:flora_mart/core/utils/routes_manager.dart';
 import 'package:flora_mart/domain/common/result.dart';
+import 'package:flora_mart/domain/entity/auth/auth_response_entity.dart';
 import 'package:flora_mart/domain/usecase/changeGuest_usecase.dart';
 import 'package:flora_mart/domain/usecase/check_guest_usecase.dart';
+import 'package:flora_mart/domain/usecase/register_usecase.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flora_mart/core/api/api_result.dart';
 import 'package:flora_mart/data/model/UserModel.dart';
@@ -30,6 +32,8 @@ part 'auth_state.dart';
 
 @injectable
 class AuthCubit extends Cubit<AuthState> {
+
+  final RegisterUsecase registerUsecase;
   @factoryMethod
   final CheckGuestUseCase checkGuestUseCase;
   final ChangeguestUsecase changeGuestUsecase;
@@ -41,13 +45,16 @@ class AuthCubit extends Cubit<AuthState> {
   final cacheHelper = getIt<CacheHelper>();
 
   AuthCubit(
-      this.verifyresetcodeUseCase,
-      this.resetpasswordUsecase,
-      this.forgetPasswordUseCase,
-      this.checkGuestUseCase,
-      this.changeGuestUsecase,
-      this.signInUsecase)
-      : super(AuthInitial());
+     this.verifyresetcodeUseCase,
+     this.resetpasswordUsecase,
+     this.forgetPasswordUseCase,
+     this.checkGuestUseCase,
+     this.changeGuestUsecase,
+      this.registerUsecase,
+  ,
+  this.signInUsecase
+  ) : super(AuthInitial());
+
 
   void doIntent(AuthIntent authIntent) {
     switch (authIntent) {
@@ -68,6 +75,9 @@ class AuthCubit extends Cubit<AuthState> {
         break;
       case ResetPassword():
         _ResetPassword(intent: authIntent);
+        break;
+      case RegisterUserIntent():
+        _register(intent: authIntent);
         break;
       case CheckAuthIntent():
         _CheekAuth();
@@ -189,4 +199,24 @@ class AuthCubit extends Cubit<AuthState> {
         }
     }
   }
+  _register({required RegisterUserIntent intent}) async {
+    emit(RegisterViewModelLoading());
+
+    final result = await registerUsecase(
+      firstName: intent.firstName,
+      lastName: intent.lastName,
+      email: intent.email,
+      password: intent.password,
+      rePassword: intent.rePassword,
+      phone: intent.phone,
+      gender: intent.gender,
+    );
+
+    result.fold(
+          (failureMessage) => emit(RegisterViewModelFailure(failureMessage)),
+          (response) => emit(RegisterViewModelSuccess(response)),
+    );
+  }
 }
+
+
