@@ -1,10 +1,17 @@
+
 import 'package:flora_mart/config/theme/app_theme.dart';
 import 'package:flora_mart/core/utils/colors_manager.dart';
 import 'package:flora_mart/presentation/tabs/cart_tab/cart_screen.dart';
 import 'package:flora_mart/presentation/tabs/categories_tab/categories_screen.dart';
 import 'package:flora_mart/presentation/tabs/profile_tab/profile_screen.dart';
 import 'package:flutter/cupertino.dart';
+
+import 'package:flora_mart/core/resuable_comp/dialogs.dart';
+import 'package:flora_mart/presentation/auth/view_model/cubit/auth_cubit.dart';
+import 'package:flora_mart/presentation/auth/view_model/cubit/auth_intent.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,10 +23,63 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+
     return Center(
       child: Text(
         'Home Screen',
         style: Theme.of(context).textTheme.headlineLarge,
+
+    //📌📌📌 This code explains the process of changing the value of a guest and 📌📌📌
+    //📌📌📌 checking whether it is a guest or not.📌📌📌
+
+    AuthCubit.get(context).doIntent(CheckGuestIntent());
+
+    return Scaffold(
+      body: BlocListener<AuthCubit, AuthState>(
+        listener: (context, state) {
+          if (state is CeckGuestState) {
+            if (state.isGuest) {
+              Dialogs.restrictedAccess(
+                context,
+                () => Navigator.pop(context),
+              );
+            }
+          }
+        },
+        child: Center(
+          child: Row(
+            spacing: 20,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ElevatedButton(
+                  onPressed: () {
+                    AuthCubit.get(context)
+                        .doIntent(ChangeGuestIntent(isGuest: false));
+                  },
+                  child: Text(
+                    "login",
+                    style: TextStyle(color: Colors.white),
+                  )),
+              ElevatedButton(
+                  onPressed: () {
+                    AuthCubit.get(context)
+                        .doIntent(ChangeGuestIntent(isGuest: true));
+                  },
+                  child: Text(
+                    "guest",
+                    style: TextStyle(color: Colors.white),
+                  )),
+              Container(
+                color: Colors.red,
+                child: FilledButton(
+                  onPressed: () {},
+                  child: const Text("user"),
+                ),
+              ),
+            ],
+          ),
+        ),
+
       ),
     );
   }
