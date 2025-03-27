@@ -29,13 +29,13 @@ class AuthCubit extends Cubit<AuthState> {
   final VerifyresetcodeUseCase verifyresetcodeUseCase;
   final ResetpasswordUsecase resetpasswordUsecase;
 
-  AuthCubit({
-    required this.verifyresetcodeUseCase,
-    required this.resetpasswordUsecase,
-    required this.forgetPasswordUseCase,
-    required this.checkGuestUseCase,
-    required this.changeGuestUsecase
-  }) : super(AuthInitial());
+  AuthCubit(
+     this.verifyresetcodeUseCase,
+     this.resetpasswordUsecase,
+     this.forgetPasswordUseCase,
+     this.checkGuestUseCase,
+     this.changeGuestUsecase
+  ) : super(AuthInitial());
 
 
   void doIntent(AuthIntent authIntent) {
@@ -47,13 +47,13 @@ class AuthCubit extends Cubit<AuthState> {
         _changeGuest(intent: authIntent);
         break;
       case ForgetPassword():
-        _ForgetPassword(intent: intent);
+        _ForgetPassword(intent: authIntent);
         break;
       case VerifyResetCode():
-        _VerifyResetCode(intent: intent);
+        _VerifyResetCode(intent: authIntent);
         break;
       case ResetPassword():
-        _ResetPassword(intent: intent);
+        _ResetPassword(intent: authIntent);
         break;
     }
   }
@@ -84,8 +84,6 @@ class AuthCubit extends Cubit<AuthState> {
       emit(CeckGuestState(isguest ?? false)); // ❌ إبقاء الحالة كما هي دون تغيير
     }
   }
-}
-
   _ForgetPassword({required ForgetPassword intent}) async {
     emit(SendEmailVerificationLoadingState());
     final result = await forgetPasswordUseCase.invoke(
@@ -139,3 +137,4 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 }
+
