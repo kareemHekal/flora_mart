@@ -4,6 +4,10 @@ import 'package:flora_mart/core/di/di.dart';
 import 'package:flora_mart/presentation/auth/login/login_screen.dart';
 import 'package:flora_mart/presentation/auth/view_model/cubit/auth_cubit.dart';
 import 'package:flora_mart/presentation/auth/view_model/cubit/auth_intent.dart';
+import 'package:flora_mart/presentation/auth/forget_password/view/forget_password/view/forget_password_screen.dart';
+import 'package:flora_mart/presentation/auth/forget_password/view/forget_password/view/reset_password_screen.dart';
+import 'package:flora_mart/presentation/auth/forget_password/view/forget_password/view/verify_reset_code_screen.dart';
+import 'package:flora_mart/presentation/auth/login/login_screen.dart';
 import 'package:flora_mart/presentation/tabs/home_tab/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,6 +41,12 @@ class MyApp extends StatelessWidget {
           routes: {
             RouteManager.homeScreen: (context) => HomeTabScreen(),
             RouteManager.loginScreen: (context) => SignInScreen(),
+            RouteManager.forgetPasswordScreen: (context) =>
+                ForgetPasswordScreen(),
+            RouteManager.emailVerificationScreen: (context) =>
+                VerifyResetCodeScreen(),
+            RouteManager.resetPasswordScreen: (context) =>
+                ResetPasswordScreen(),
           },
           theme: AppTheme.lightTheme,
           localizationsDelegates: context.localizationDelegates,

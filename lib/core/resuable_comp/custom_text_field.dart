@@ -1,3 +1,4 @@
+import 'package:flora_mart/core/utils/colors_manager.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -27,7 +28,15 @@ class CustomTextField extends StatelessWidget {
           labelStyle: Theme.of(context).textTheme.labelSmall,
           floatingLabelBehavior: FloatingLabelBehavior.always,
           hintText: hintText,
-          hintStyle: Theme.of(context).textTheme.labelMedium,
+          hintStyle: TextStyle(
+            color: Colors.grey,
+            fontSize: 12,
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: ColorManager.primaryColor, width: 1.0), // لون الإطار عند الضغط
+            borderRadius: BorderRadius.circular(10),
+          ),
+          //hintStyle: Theme.of(context).textTheme.labelMedium,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(
               4,
