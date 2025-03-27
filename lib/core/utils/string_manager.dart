@@ -22,4 +22,42 @@ class AppStrings {
   static String get guestRestrictionMessage => "guestRestrictionMessage".tr();
   static String get back => "back".tr();
   static String get login => "login".tr();
+  static String get phoneNumberCannotBeMoreThan20Characters =>
+      "phoneNumberCannotBeMoreThan20Characters".tr();
+  static String get passwordMustContainAtLeastOneSpecialCharacter =>
+      "passwordMustContainAtLeastOneSpecialCharacter".tr();
+
+  static String get password => "password";
+
+  static String get email => "email".tr();
+  static String get enterYourEmail => "enterYourEmail".tr();
+  static String get notValidEmail => "notValidEmail".tr();
+
+  static String get forgetPassword => "forgetPassword".tr();
+  static String get enterYourForgetPassword => "enterYourForgetPassword".tr();
+
+  static String get resetPassword => "resetPassword".tr();
+  static String get newPassword => "newPassword".tr();
+  static String get enterYourNewPassword => "enterYourNewPassword".tr();
+  static String get enterYourPassword => "enterYourPassword".tr();
+  static String get confirmPassword => "confirmPassword".tr();
+  static String get currentPassword => "currentPassword".tr();
+
+  static String get confirm => "confirm".tr();
+
+  static String get pleaseEnterEmailsAssociatedToUrAccount =>
+      "pleaseEnterEmailsAssociatedToUrAccount".tr();
+
+  static String get forgetpassword => "forgetpassword".tr();
+
+  static String get emailVerification => "emailVerification".tr();
+  static String get sendedCode => "sendedCode".tr();
+  static String get dontRecieveCode => "dontRecieveCode".tr();
+  static String get resend => "resend".tr();
+
+  static String get continueText => "continue".tr();
+  static String get resetText => "resetText".tr();
+  static String get passwordvalid => "passwordvalid".tr();
+
+
 }

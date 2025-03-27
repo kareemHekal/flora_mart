@@ -29,6 +29,8 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   collection: any
+  pinput: ^5.0.1
+  flutter_timer_countdown: ^1.0.7
   cupertino_icons: any
   fluttertoast: any
   flutter_screenutil: any
@@ -62,6 +64,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  bloc_test: ^9.1.0
+  mockito: ^5.4.2
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
