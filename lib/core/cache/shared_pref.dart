@@ -1,8 +1,10 @@
+import 'package:injectable/injectable.dart';
 import 'dart:developer';
 
 import 'package:flora_mart/core/constant.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+@singleton
 
 @singleton
 class CacheHelper {
@@ -13,6 +15,8 @@ class CacheHelper {
   CacheHelper() {
     init();
     log("Constructor called shared prefs");
+  } static void initForTest(SharedPreferences prefs) {
+    _sharedPrefs = prefs;
   }
 
   Future<void> init() async {
@@ -41,7 +45,10 @@ class CacheHelper {
       return false;
     }
   }
-
+  static T? getRememberMe<T>() {
+    if (_sharedPrefs == null) return null;
+    return _sharedPrefs!.getBool(Constant.isRememberMe) as T?;
+  }
   //========USAGE=========\\
   /// bool set = await CacheHelper.setData<String>("token", response.data['token']);
   Future<bool> setData<T>(String key, T value) async {
@@ -63,23 +70,24 @@ class CacheHelper {
 
   //========USAGE=========\\
   /// String? token = CacheHelper.getData<String>("token");
-  Future<T?> getData<T>(String key) async {
+  Future<T> getData<T>(String key) async {
     await _ensureInitialized();
 
     if (T == String) {
-      return _sharedPrefs!.getString(key) as T?;
+      return (_sharedPrefs!.getString(key) as T?) ?? "" as T;
     } else if (T == bool) {
-      return _sharedPrefs!.getBool(key) as T?;
+      return (_sharedPrefs!.getBool(key) as T?) ?? false as T;
     } else if (T == int) {
-      return _sharedPrefs!.getInt(key) as T?;
+      return (_sharedPrefs!.getInt(key) as T?) ?? 0 as T;
     } else if (T == double) {
-      return _sharedPrefs!.getDouble(key) as T?;
+      return (_sharedPrefs!.getDouble(key) as T?) ?? 0.0 as T;
     } else if (T == List<String>) {
-      return _sharedPrefs!.getStringList(key) as T?;
+      return (_sharedPrefs!.getStringList(key) as T?) ?? [] as T;
     } else {
       throw Exception("Invalid type");
     }
   }
+
 
   Future<bool> removeData(String key) async {
     await _ensureInitialized();

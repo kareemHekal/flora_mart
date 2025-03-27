@@ -3,10 +3,11 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i3;
+import 'dart:async' as _i2;
 
-import 'package:flora_mart/core/cache/shared_pref.dart' as _i2;
+import 'package:flora_mart/core/cache/shared_pref.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:mockito/src/dummies.dart' as _i4;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -22,52 +23,65 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
+class _FakeFuture_0<T1> extends _i1.SmartFake implements _i2.Future<T1> {
+  _FakeFuture_0(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
 /// A class which mocks [CacheHelper].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockCacheHelper extends _i1.Mock implements _i2.CacheHelper {
+class MockCacheHelper extends _i1.Mock implements _i3.CacheHelper {
   MockCacheHelper() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i3.Future<void> init() =>
+  _i2.Future<void> init() =>
       (super.noSuchMethod(
             Invocation.method(#init, []),
-            returnValue: _i3.Future<void>.value(),
-            returnValueForMissingStub: _i3.Future<void>.value(),
+            returnValue: _i2.Future<void>.value(),
+            returnValueForMissingStub: _i2.Future<void>.value(),
           )
-          as _i3.Future<void>);
+          as _i2.Future<void>);
 
   @override
-  _i3.Future<bool> checkGuest() =>
+  _i2.Future<bool> checkGuest() =>
       (super.noSuchMethod(
             Invocation.method(#checkGuest, []),
-            returnValue: _i3.Future<bool>.value(false),
+            returnValue: _i2.Future<bool>.value(false),
           )
-          as _i3.Future<bool>);
+          as _i2.Future<bool>);
 
   @override
-  _i3.Future<bool> setData<T>(String? key, T? value) =>
+  _i2.Future<bool> setData<T>(String? key, T? value) =>
       (super.noSuchMethod(
             Invocation.method(#setData, [key, value]),
-            returnValue: _i3.Future<bool>.value(false),
+            returnValue: _i2.Future<bool>.value(false),
           )
-          as _i3.Future<bool>);
+          as _i2.Future<bool>);
 
   @override
-  _i3.Future<T?> getData<T>(String? key) =>
+  _i2.Future<T> getData<T>(String? key) =>
       (super.noSuchMethod(
             Invocation.method(#getData, [key]),
-            returnValue: _i3.Future<T?>.value(),
+            returnValue:
+                _i4.ifNotNull(
+                  _i4.dummyValueOrNull<T>(
+                    this,
+                    Invocation.method(#getData, [key]),
+                  ),
+                  (T v) => _i2.Future<T>.value(v),
+                ) ??
+                _FakeFuture_0<T>(this, Invocation.method(#getData, [key])),
           )
-          as _i3.Future<T?>);
+          as _i2.Future<T>);
 
   @override
-  _i3.Future<bool> removeData(String? key) =>
+  _i2.Future<bool> removeData(String? key) =>
       (super.noSuchMethod(
             Invocation.method(#removeData, [key]),
-            returnValue: _i3.Future<bool>.value(false),
+            returnValue: _i2.Future<bool>.value(false),
           )
-          as _i3.Future<bool>);
+          as _i2.Future<bool>);
 }

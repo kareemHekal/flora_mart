@@ -60,7 +60,10 @@ Future<ApiResult<T>> executeApi<T>(Future<T> Function() apiCall) async {
   try {
     var result = await apiCall.call();
     return SuccessApiResult(result);
-  } on DioException catch (ex) {
+  }
+
+
+  on DioException catch (ex) {
     var errorModel = ErrorModel.fromJson(ex.response?.data);
     log(errorModel.message.toString());
     switch (ex.type) {
@@ -82,8 +85,10 @@ Future<ApiResult<T>> executeApi<T>(Future<T> Function() apiCall) async {
               : ErrorModel(message: "Unknown error");
 
           if (responseCode != 0 && responseCode >= 400 && responseCode < 500) {
+            print("$responseCode");
             return ErrorApiResult(ClientError(message: errorModel.message));
           }
+
           if (responseCode != 0 && responseCode >= 500 && responseCode < 600) {
             return ErrorApiResult(ServerError(errorModel: errorModel));
           }
@@ -95,6 +100,7 @@ Future<ApiResult<T>> executeApi<T>(Future<T> Function() apiCall) async {
         }
     }
   } on Exception catch (ex) {
+    print(" $ex 😁🤑👆❤️⭐");
     return ErrorApiResult(ex);
   }
 }

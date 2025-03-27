@@ -1,5 +1,16 @@
 ///  Auth Intent ///
 sealed class AuthIntent {}
+class SignInIntent extends AuthIntent {
+  final String email;
+  final bool rememberMe;
+  final String password;
+
+  SignInIntent({
+    required this.rememberMe,
+    required this.email,
+    required this.password,
+  });
+}
 
 class CheckGuestIntent extends AuthIntent {}
 
@@ -8,6 +19,7 @@ class ChangeGuestIntent extends AuthIntent {
 
   ChangeGuestIntent({required this.isGuest});
 }
+class CheckAuthIntent extends AuthIntent {}
 
 class RegisterUserIntent extends AuthIntent {
   final String firstName;

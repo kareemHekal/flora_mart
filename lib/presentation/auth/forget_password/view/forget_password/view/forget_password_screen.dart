@@ -69,7 +69,6 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-          leading: Icon(Icons.arrow_back_ios),
           title: Text(
             AppStrings.password,
           ),
@@ -97,7 +96,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 14,
-                    color: ColorManager.greyColor,
+                    color: ColorManager.grey,
                     fontWeight: FontWeight.w400),
               ),
             ),
@@ -121,6 +120,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0),
               child: CustomTextButton(
+                borderColor: ColorManager.pinkBase,
                 onPressed: _validateAndContinue,
                 text: AppStrings.confirm,
                 color: ColorManager.primaryColor,

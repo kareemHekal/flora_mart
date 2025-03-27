@@ -5,6 +5,7 @@ import 'package:flora_mart/core/resuable_comp/app_bar.dart';
 import 'package:flora_mart/core/resuable_comp/custom_text_field.dart';
 import 'package:flora_mart/core/resuable_comp/text_button.dart';
 import 'package:flora_mart/core/utils/colors_manager.dart';
+import 'package:flora_mart/core/utils/routes_manager.dart';
 import 'package:flora_mart/core/utils/string_manager.dart';
 import 'package:flora_mart/presentation/auth/view_model/cubit/auth_cubit.dart';
 import 'package:flora_mart/presentation/auth/view_model/cubit/auth_intent.dart';
@@ -46,6 +47,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return BlocProvider(
       create: (context) => getIt<AuthCubit>(),
       child: Scaffold(
+        appBar: AppBar(
+
+          title: Text(AppStrings.signUp),
+
+        ),
         body: Padding(
           padding: const EdgeInsets.all(25),
           child: Form(
@@ -53,12 +59,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  AppBarWidget(
-                    onpressed: () => () {
-                      // هيروح للLogin
-                    },
-                    title: AppStrings.signUp,
-                  ),
+
                   const SizedBox(height: 25),
                   Row(
                     children: [
@@ -298,6 +299,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 );
                           }
                         },
+                        borderColor: ColorManager.pinkBase,
                         text: AppStrings.signUp,
                         color: ColorManager.primaryColor,
                         textColor: Colors.white,
@@ -310,15 +312,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     children: [
                       Text(AppStrings.alreadyHaveAnAccount,
                           style: TextStyle(fontSize: 17)),
-                      GestureDetector(
-                        onTap: () => () {
-                          // هيروح للLogin
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushReplacementNamed(context, RouteManager.loginScreen);
                         },
                         child: Text(AppStrings.login,
                             style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w500,
-                                color: Colors.blueAccent,
+                                color: ColorManager.pinkBase,
                                 decoration: TextDecoration.underline)),
                       ),
                     ],

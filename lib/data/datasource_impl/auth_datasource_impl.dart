@@ -5,7 +5,7 @@ import 'package:flora_mart/data/datasource_contract/auth_datasource.dart';
 import 'package:flora_mart/data/model/auth/auth_response.dart';
 import 'package:injectable/injectable.dart';
 
-@injectable
+@Injectable(as: AuthDatasource)
 class AuthDatasourceImpl extends AuthDatasource {
   final ApiManager apiManager;
 

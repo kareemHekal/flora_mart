@@ -99,7 +99,7 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen> {
                 alignment: Alignment.center,
                 child: Text(
                   AppStrings.emailVerification,
-                  style: AppTextStyle.medium20.copyWith(color: ColorManager.black_base),
+                  style: AppTextStyle.medium20.copyWith(color: ColorManager.blackBase),
                 ),
               ),
               SizedBox(height: Config.screenHight! * 0.012),
