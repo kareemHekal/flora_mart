@@ -16,15 +16,21 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'auth_cubit_test.mocks.dart';
 
-
-
-@GenerateMocks([CheckGuestUseCase, ChangeguestUsecase,ForgetPasswordUseCase, VerifyresetcodeUseCase, ResetpasswordUsecase,LoginUsecase])
+@GenerateMocks([
+  CheckGuestUseCase,
+  ChangeguestUsecase,
+  ForgetPasswordUseCase,
+  VerifyresetcodeUseCase,
+  ResetpasswordUsecase,
+  LoginUsecase
+])
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   group(
     'AuthCubit',
-        () {
+    () {
       late CheckGuestUseCase checkGuestUseCase;
       late LoginUsecase loginUsecase;
       late ChangeguestUsecase changeGuestUsecase;
@@ -53,7 +59,7 @@ void main() {
       });
       blocTest<AuthCubit, AuthState>(
         'when call do intent with CheckGuestIntent it '
-            ' should check guest and return correct state',
+        ' should check guest and return correct state',
         build: () {
           var result = Success<bool>(true);
           provideDummy<Result<bool>>(result);
@@ -72,7 +78,7 @@ void main() {
 
       blocTest<AuthCubit, AuthState>(
         'when call do intent with ChangeGuestIntent it '
-            ' should change guest and return correct state',
+        ' should change guest and return correct state',
         build: () {
           var result = Success<bool>(true);
           var value = true;
@@ -130,28 +136,52 @@ void main() {
         'emits [ResetPasswordLoadingState, ResetPasswordSuccessState] when password reset is successful',
         build: () {
           provideDummy<ApiResult<bool>>(SuccessApiResult(true));
-          when(mockResetpasswordUsecase.invoke(email: testEmail, password: testPassword))
+          when(mockResetpasswordUsecase.invoke(
+                  email: testEmail, password: testPassword))
               .thenAnswer((_) async => SuccessApiResult(true));
           return authCubit;
         },
-        act: (cubit) => cubit.doIntent(ResetPassword(email: testEmail, NewPassword: testPassword)),
+        act: (cubit) => cubit.doIntent(
+            ResetPassword(email: testEmail, NewPassword: testPassword)),
         expect: () => [
           isA<ResetPasswordLoadingState>(),
           isA<ResetPasswordSuccessState>(),
         ],
       );
-
     },
   );
   group('LoginCubit', () {
     late LoginUsecase signInUsecase;
+    late CheckGuestUseCase checkGuestUseCase;
+    late LoginUsecase loginUsecase;
+    late ChangeguestUsecase changeGuestUsecase;
+    late AuthCubit authCubit;
+    late MockForgetPasswordUseCase mockForgetPasswordUseCase;
+    late MockVerifyresetcodeUseCase mockVerifyresetcodeUseCase;
+    late MockResetpasswordUsecase mockResetpasswordUsecase;
+
     const testEmail = 'test@example.com';
     const testPassword = 'password123';
     const testRememberMe = true;
     final testUserModel = UserModel(token: 'test_token');
 
     setUp(() {
-      signInUsecase = MockLoginUsecase();
+      SharedPreferences.setMockInitialValues({});
+      loginUsecase = MockLoginUsecase();
+      checkGuestUseCase = MockCheckGuestUseCase();
+      changeGuestUsecase = MockChangeguestUsecase();
+      mockForgetPasswordUseCase = MockForgetPasswordUseCase();
+      mockVerifyresetcodeUseCase = MockVerifyresetcodeUseCase();
+      mockResetpasswordUsecase = MockResetpasswordUsecase();
+
+      authCubit = AuthCubit(
+        mockVerifyresetcodeUseCase,
+        mockResetpasswordUsecase,
+        mockForgetPasswordUseCase,
+        checkGuestUseCase,
+        changeGuestUsecase,
+        loginUsecase,
+      );
     });
 
     provideDummy<ApiResult<UserModel>>(
@@ -161,19 +191,18 @@ void main() {
       'emits [LoginLoading, LoginSuccess] when sign in succeeds',
       build: () {
         ApiResult<UserModel> userModelApiResult =
-            SuccessApiResult(testUserModel);
+        SuccessApiResult(testUserModel);
         provideDummy<ApiResult<UserModel>>(
             SuccessApiResult<UserModel>(UserModel(token: 'dummy_token')));
 
-        when(signInUsecase.invoke(
+        when(loginUsecase.invoke(
           email: testEmail,
-          password:testPassword,
+          password: testPassword,
           rememberMe: testRememberMe,
         )).thenAnswer((_) async => Future.value(
             SuccessApiResult<UserModel>(UserModel(token: 'valid_token'))));
 
-        return AuthCubit(
-            signInUsecase, MockCheckGuestUseCase(), MockChangeguestUsecase());
+        return authCubit;
       },
       act: (cubit) => cubit.doIntent(
         SignInIntent(

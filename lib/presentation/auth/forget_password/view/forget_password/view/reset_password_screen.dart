@@ -25,7 +25,7 @@ class ResetPasswordScreen extends StatefulWidget {
 class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
-  TextEditingController();
+      TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -82,51 +82,56 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           physics: BouncingScrollPhysics(),
           child: Form(
             key: _formKey,
-            child: Column(
-              spacing: 20,
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    AppStrings.resetPassword,
-                    style: AppTextStyle.medium18.copyWith(color: ColorManager.black_base),
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                spacing: 20,
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      AppStrings.resetPassword,
+                      style: AppTextStyle.medium18
+                          .copyWith(color: ColorManager.blackBase),
+                    ),
                   ),
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    AppStrings.resetText,
-                    textAlign: TextAlign.center,
-                    style:
-                    AppTextStyle.regular14.copyWith(color: ColorManager.grey),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      AppStrings.resetText,
+                      textAlign: TextAlign.center,
+                      style: AppTextStyle.regular14
+                          .copyWith(color: ColorManager.grey),
+                    ),
                   ),
-                ),
-                SizedBox(height: Config.screenHight! * 0.012),
-                /* Password Field */
-                CustomPasswordField(
-                  label: AppStrings.newPassword,
-                  controller: passwordController,
-                  validator: Validator.password,
-                ),
+                  SizedBox(height: Config.screenHight! * 0.012),
+                  /* Password Field */
+                  CustomPasswordField(
+                    label: AppStrings.newPassword,
+                    controller: passwordController,
+                    validator: Validator.password,
+                  ),
 
-                /* Confirm Password Field */
-                CustomPasswordField(
-                  label: AppStrings.confirmPassword,
-                  controller: confirmPasswordController,
-                  validator: (value) =>
-                      Validator.confirmPassword(value, passwordController.text),
-                ),
+                  /* Confirm Password Field */
+                  CustomPasswordField(
+                    label: AppStrings.confirmPassword,
+                    controller: confirmPasswordController,
+                    validator: (value) =>
+                        Validator.confirmPassword(value, passwordController.text),
+                  ),
 
-                /* Confirm Button */
-                CustomTextButton(
-                  onPressed: _validateAndUpdatePassword,
-                  text: AppStrings.confirm,
-                  color: ColorManager.primaryColor,
-                  textColor: ColorManager.white,
-                ),
-              ],
+                  /* Confirm Button */
+                  CustomTextButton(
+                    borderColor: ColorManager.pinkBase,
+                    onPressed: _validateAndUpdatePassword,
+                    text: AppStrings.confirm,
+                    color: ColorManager.primaryColor,
+                    textColor: ColorManager.white,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

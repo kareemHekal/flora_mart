@@ -18,20 +18,14 @@
   "phoneNumberCannotBeMoreThan20Characters": "Phone number cannot be more than 20 characters",
   "login": "Login",
   "loginSuccessfully": "Login Successfully",
-  "email": "Email",
-  "enterYourEmail": "Enter your e-mail",
-  "password": "Password",
   "enterPassword": "Enter password",
   "rememberMe": "Remember me",
-  "forgetpassword": "Forget password?",
   "dontHaveAccount": "Don't have an account?",
   "signUp": "Sign up",
   "countinueAsGuest": "Continue as Guest",
   "passwordMustContainAtLeastOneSpecialCharacter": "Password must contain at least one special character",
   "restrictedAccess": "Restricted Access",
   "guestRestrictionMessage": "This action is not allowed for guest users. Please log in or sign up to continue.",
-  "back": "Back",
-  "login": "Login",
 
   "password": "Password",
   "email": "Email",
@@ -54,6 +48,6 @@
   "resend": "Resend",
   "continueText": "continue",
   "resetText": "Password must not be empty and must contain \n6 characters with upper case letter and one \nnumber at least ",
-  "passwordvalid": "passwordvalid"
+  "passwordvalid": "passwordvalid",
   "back": "Back"
 }

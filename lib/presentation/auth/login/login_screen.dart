@@ -135,7 +135,9 @@ class _SignInScreenState extends State<SignInScreen> {
                             ],
                           ),
                           InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.pushNamed(context, RouteManager.forgetPasswordScreen);
+                            },
                             child: Text(
                               AppStrings.forgetpassword,
                               style: Theme.of(context).textTheme.bodyMedium?.copyWith(

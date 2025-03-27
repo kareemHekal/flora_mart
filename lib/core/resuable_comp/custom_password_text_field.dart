@@ -32,16 +32,13 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
   @override
   Widget build(BuildContext context) {
     return Flexible(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: TextFormField(
-          obscuringCharacter: "★",
-          controller: widget.controller,
-          validator: widget.validator,
-          obscureText: _obscureText,
-          decoration: getInputDecoration(context, widget.label,
-              widget.placeholder ?? AppStrings.enterYourPassword // ✅ الحل هنا
-          ),
+      child: TextFormField(
+        obscuringCharacter: "★",
+        controller: widget.controller,
+        validator: widget.validator,
+        obscureText: _obscureText,
+        decoration: getInputDecoration(context, widget.label,
+            widget.placeholder ?? AppStrings.enterYourPassword // ✅ الحل هنا
         ),
       ),
     );

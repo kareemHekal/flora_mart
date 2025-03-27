@@ -39,15 +39,15 @@ class AuthCubit extends Cubit<AuthState> {
   final ResetpasswordUsecase resetpasswordUsecase;
   String? startRoute;
   final cacheHelper = getIt<CacheHelper>();
-  AuthCubit(
-     this.verifyresetcodeUseCase,
-     this.resetpasswordUsecase,
-     this.forgetPasswordUseCase,
-     this.checkGuestUseCase,
-     this.changeGuestUsecase
-  this.signInUsecase
-  ) : super(AuthInitial());
 
+  AuthCubit(
+      this.verifyresetcodeUseCase,
+      this.resetpasswordUsecase,
+      this.forgetPasswordUseCase,
+      this.checkGuestUseCase,
+      this.changeGuestUsecase,
+      this.signInUsecase)
+      : super(AuthInitial());
 
   void doIntent(AuthIntent authIntent) {
     switch (authIntent) {
@@ -74,7 +74,6 @@ class AuthCubit extends Cubit<AuthState> {
         break;
     }
   }
-
 
   static AuthCubit get(context) => BlocProvider.of(context);
 
@@ -121,9 +120,11 @@ class AuthCubit extends Cubit<AuthState> {
         break;
     }
   }
+
   Future<bool> getRememberMe() async {
     return await cacheHelper.getData<bool>(Constant.isRememberMe);
   }
+
   _CheekAuth() async {
     bool rememberMe = await getRememberMe();
     if (rememberMe == true) {
@@ -134,6 +135,7 @@ class AuthCubit extends Cubit<AuthState> {
       log(startRoute.toString());
     }
     print("$startRoute ⭐⭐⭐  cubit");
+  }
 
   _ForgetPassword({required ForgetPassword intent}) async {
     emit(SendEmailVerificationLoadingState());
@@ -188,4 +190,3 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 }
-
