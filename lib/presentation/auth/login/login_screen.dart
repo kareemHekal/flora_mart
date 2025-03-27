@@ -28,6 +28,7 @@ class _SignInScreenState extends State<SignInScreen> {
   final TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final cacheHelper = getIt<CacheHelper>();
+  bool _isPasswordVisible = false;
 
   void _validateAndLogin(BuildContext context) {
     if (_formKey.currentState!.validate()) {
@@ -61,7 +62,7 @@ class _SignInScreenState extends State<SignInScreen> {
       body: BlocListener<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is LoginSuccessState) {
-            Navigator.pushReplacementNamed(context, RouteManager.homeScreen);
+            Navigator.pushReplacementNamed(context, RouteManager.mainScreen);
             toastMessage(
               message: AppStrings.loginSuccessfully,
               tybeMessage: TybeMessage.positive,
@@ -103,9 +104,21 @@ class _SignInScreenState extends State<SignInScreen> {
                         labelText: AppStrings.password,
                         hintText: AppStrings.enterPassword,
                         controller: passwordController,
-                        keyboard: TextInputType.visiblePassword,
+                        keyboard: TextInputType.text,
+                        obscureText: !_isPasswordVisible,
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _isPasswordVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _isPasswordVisible = !_isPasswordVisible;
+                            });
+                          },
+                        ),
                         validator: Validator.password,
-                        obscureText: true,
                       ),
                       SizedBox(height: 4.h),
                       Row(

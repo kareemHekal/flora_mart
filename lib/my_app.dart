@@ -1,8 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 
-import 'package:flora_mart/presentation/tabs/cart_tab/cart_screen.dart';
-import 'package:flora_mart/presentation/tabs/categories_tab/categories_screen.dart';
-=======
 import 'package:flora_mart/core/cache/shared_pref.dart';
 import 'package:flora_mart/presentation/auth/login/login_screen.dart';
 import 'package:flora_mart/presentation/auth/forget_password/view/forget_password/view/forget_password_screen.dart';
@@ -29,7 +26,7 @@ class MyApp extends StatelessWidget {
       bool? rememberMe = CacheHelper.getRememberMe() ;
       print("$rememberMe ⭐⭐⭐⭐⭐⭐⭐⭐" );
       return rememberMe == true
-          ? RouteManager.homeScreen
+          ? RouteManager.mainScreen
           : RouteManager.loginScreen;
     }
 
@@ -50,7 +47,7 @@ class MyApp extends StatelessWidget {
           // },
 
           routes: {
-            RouteManager.homeScreen: (context) => HomeTabScreen(),
+            RouteManager.mainScreen: (context) => MainScreen(),
             RouteManager.loginScreen: (context) => SignInScreen(),
             RouteManager.registerScreen: (context) => RegisterScreen(),
             RouteManager.forgetPasswordScreen: (context) =>

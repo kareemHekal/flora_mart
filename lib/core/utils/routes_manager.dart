@@ -1,5 +1,6 @@
 class RouteManager {
   static const String homeScreen = "/HOMESCREEN";
+  static const String mainScreen = "/mainScreen";
 
   static const String cartScreen = "/CARTSCREEN";
   static const String profileScreen = "/PROFILESCREEN";

@@ -128,12 +128,12 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<bool> getRememberMe() async {
+  Future<bool> _getRememberMe() async {
     return await cacheHelper.getData<bool>(Constant.isRememberMe);
   }
 
   _CheekAuth() async {
-    bool rememberMe = await getRememberMe();
+    bool rememberMe = await _getRememberMe();
     if (rememberMe == true) {
       startRoute = RouteManager.homeScreen;
       log(startRoute.toString());

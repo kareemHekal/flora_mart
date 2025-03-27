@@ -24,15 +24,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
 
-    return Center(
-      child: Text(
-        'Home Screen',
-        style: Theme.of(context).textTheme.headlineLarge,
 
     //📌📌📌 This code explains the process of changing the value of a guest and 📌📌📌
     //📌📌📌 checking whether it is a guest or not.📌📌📌
 
-    AuthCubit.get(context).doIntent(CheckGuestIntent());
+
 
     return Scaffold(
       body: BlocListener<AuthCubit, AuthState>(
