@@ -5,8 +5,9 @@ import 'package:flora_mart/core/resuable_comp/app_bar.dart';
 import 'package:flora_mart/core/resuable_comp/custom_text_field.dart';
 import 'package:flora_mart/core/resuable_comp/text_button.dart';
 import 'package:flora_mart/core/utils/colors_manager.dart';
-import 'package:flora_mart/presentation/auth/register/intent/register_intent.dart';
-import 'package:flora_mart/presentation/auth/register/view_model/register_view_model_cubit.dart';
+import 'package:flora_mart/core/utils/string_manager.dart';
+import 'package:flora_mart/presentation/auth/view_model/cubit/auth_cubit.dart';
+import 'package:flora_mart/presentation/auth/view_model/cubit/auth_intent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -43,7 +44,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<RegisterViewModelCubit>(),
+      create: (context) => getIt<AuthCubit>(),
       child: Scaffold(
         body: Padding(
           padding: const EdgeInsets.all(25),
@@ -53,16 +54,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: Column(
                 children: [
                   AppBarWidget(
-                    onpressed: () => Navigator.pop(context),
-                    title: "Sign Up",
+                    onpressed: () => () {
+                      // هيروح للLogin
+                    },
+                    title: AppStrings.signUp,
                   ),
                   const SizedBox(height: 25),
                   Row(
                     children: [
                       Expanded(
                         child: CustomTextField(
-                          labelText: "First name",
-                          hintText: "Enter first name",
+                          labelText: AppStrings.firstName,
+                          hintText: AppStrings.enterFirstName,
                           controller: firstNameController,
                           keyboard: TextInputType.text,
                           validator: (data) => (data?.isEmpty ?? true)
@@ -73,8 +76,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       const SizedBox(width: 15),
                       Expanded(
                         child: CustomTextField(
-                          labelText: "Last name",
-                          hintText: "Enter last name",
+                          labelText: AppStrings.lastName,
+                          hintText: AppStrings.enterLastName,
                           controller: lastNameController,
                           keyboard: TextInputType.text,
                           validator: (data) => (data?.isEmpty ?? true)
@@ -86,13 +89,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   const SizedBox(height: 30),
                   CustomTextField(
-                    labelText: "Email",
-                    hintText: "Enter your email",
+                    labelText: AppStrings.email,
+                    hintText: AppStrings.enterYourEmail,
                     controller: emailController,
                     keyboard: TextInputType.emailAddress,
                     validator: (data) {
                       if (data == null || data.isEmpty || !data.contains('@')) {
-                        return 'Invalid email';
+                        return AppStrings.invalidEmail;
                       }
                       return null;
                     },
@@ -102,8 +105,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     children: [
                       Expanded(
                         child: CustomTextField(
-                          labelText: "Password",
-                          hintText: "Enter password",
+                          labelText: AppStrings.password,
+                          hintText: AppStrings.enterPassword,
                           controller: passwordController,
                           keyboard: TextInputType.text,
                           obscureText: !_isPasswordVisible,
@@ -121,14 +124,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                           validator: (data) {
                             if (data == null || data.isEmpty) {
-                              return 'Please enter a password';
+                              return AppStrings.pleaseEnterAPassword;
                             }
                             if (data.length < 6) {
-                              return 'Password must be at least 6 characters';
+                              return AppStrings
+                                  .passwordMustBeAtLeast6Characters;
                             }
                             final passwordPattern = Constant.regexPass;
                             if (!passwordPattern.hasMatch(data)) {
-                              return 'Please enter a correct password (e.g., Elevet@123)';
+                              return AppStrings.pleaseEnterACorrectPassword;
                             }
                             return null;
                           },
@@ -137,8 +141,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       const SizedBox(width: 15),
                       Expanded(
                         child: CustomTextField(
-                          labelText: "Confirm password",
-                          hintText: "Confirm password",
+                          labelText: AppStrings.confirmPassword,
+                          hintText: AppStrings.confirmPassword,
                           controller: rePasswordController,
                           keyboard: TextInputType.text,
                           obscureText: !_isPasswordVisible,
@@ -156,13 +160,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                           validator: (data) {
                             if (data == null || data.isEmpty) {
-                              return 'Please enter your password confirmation';
+                              return AppStrings
+                                  .pleaseEnterYourPasswordConfirmation;
                             }
                             if (data.length < 6) {
-                              return 'Password must be at least 6 characters';
+                              return AppStrings
+                                  .passwordMustBeAtLeast6Characters;
                             }
                             if (data != passwordController.text) {
-                              return 'Passwords do not match';
+                              return AppStrings.passwordsDoNotMatch;
                             }
                             return null;
                           },
@@ -172,18 +178,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   const SizedBox(height: 30),
                   CustomTextField(
-                    labelText: "Phone number",
-                    hintText: "Enter phone number",
+                    labelText: AppStrings.phoneNumber,
+                    hintText: AppStrings.enterPhoneNumber,
                     controller: phoneController,
                     keyboard: TextInputType.phone,
-                    validator: (data) =>
-                        (data?.isEmpty ?? true) ? 'Invalid phone number' : null,
+                    validator: (data) => (data?.isEmpty ?? true)
+                        ? AppStrings.invalidPhoneNumber
+                        : null,
                   ),
                   const SizedBox(height: 30),
                   FormField<String>(
                     validator: (value) {
                       if (selectedGender == null) {
-                        return 'Please select a gender';
+                        return AppStrings.pleaseSelectAGender;
                       }
                       return null;
                     },
@@ -193,14 +200,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         children: [
                           Row(
                             children: [
-                              const Text("Gender",
+                              Text(AppStrings.gender,
                                   style: TextStyle(
                                       fontSize: 15, color: Colors.black54)),
                               const SizedBox(width: 40),
                               Row(
                                 children: [
                                   Radio<String>(
-                                    value: "Male",
+                                    value: AppStrings.male,
                                     groupValue: selectedGender,
                                     onChanged: (value) {
                                       setState(() {
@@ -209,14 +216,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       });
                                     },
                                   ),
-                                  const Text("Male"),
+                                  Text(AppStrings.male),
                                 ],
                               ),
                               const SizedBox(width: 20),
                               Row(
                                 children: [
                                   Radio<String>(
-                                    value: "Female",
+                                    value: AppStrings.female,
                                     groupValue: selectedGender,
                                     onChanged: (value) {
                                       setState(() {
@@ -225,7 +232,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       });
                                     },
                                   ),
-                                  const Text("Female"),
+                                  Text(AppStrings.female),
                                 ],
                               ),
                             ],
@@ -247,11 +254,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text('By signing up, you agree to our',
+                      Text(AppStrings.bySigningUp,
                           style: TextStyle(fontSize: 12)),
                       GestureDetector(
                         onTap: () {},
-                        child: const Text(' Terms & Conditions',
+                        child: Text(AppStrings.terms,
                             style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,
@@ -260,13 +267,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ],
                   ),
                   const SizedBox(height: 40),
-                  BlocConsumer<RegisterViewModelCubit, RegisterViewModelState>(
+                  BlocConsumer<AuthCubit, AuthState>(
                     listener: (context, state) {
                       if (state is RegisterViewModelSuccess) {
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                                 content: Text("Registration Successful!")));
-                        Navigator.pop(context);
+                        () {
+                          // هيروح للLogin
+                        };
                       } else if (state is RegisterViewModelFailure) {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(SnackBar(content: Text(state.error)));
@@ -276,7 +285,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       return CustomTextButton(
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
-                            context.read<RegisterViewModelCubit>().onIntent(
+                            context.read<AuthCubit>().doIntent(
                                   RegisterUserIntent(
                                     firstName: firstNameController.text.trim(),
                                     lastName: lastNameController.text.trim(),
@@ -284,12 +293,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     password: passwordController.text,
                                     rePassword: rePasswordController.text,
                                     phone: phoneController.text.trim(),
-                                    gender: selectedGender ?? "Male",
+                                    gender: selectedGender!,
                                   ),
                                 );
                           }
                         },
-                        text: "Sign up",
+                        text: AppStrings.signUp,
                         color: ColorManager.primaryColor,
                         textColor: Colors.white,
                       );
@@ -299,15 +308,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text('Already have an account?',
+                      Text(AppStrings.alreadyHaveAnAccount,
                           style: TextStyle(fontSize: 17)),
                       GestureDetector(
-                        onTap: () => Navigator.pop(context),
-                        child: const Text(' Login',
+                        onTap: () => () {
+                          // هيروح للLogin
+                        },
+                        child: Text(AppStrings.login,
                             style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w500,
-                                color: Colors.blue,
+                                color: Colors.blueAccent,
                                 decoration: TextDecoration.underline)),
                       ),
                     ],
