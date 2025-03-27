@@ -18,3 +18,4 @@ class ChangeGuestIntent extends AuthIntent {
 
   ChangeGuestIntent({required this.isGuest});
 }
+class CheckAuthIntent extends AuthIntent {}

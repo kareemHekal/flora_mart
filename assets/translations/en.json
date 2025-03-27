@@ -16,9 +16,19 @@
   "lastNameCannotBeMoreThan20Characters": "Last name cannot be more than 20 characters",
   "phoneNumberCannotBeEmpty": "Phone number cannot be empty",
   "phoneNumberCannotBeMoreThan20Characters": "Phone number cannot be more than 20 characters",
+  "login": "Login",
+  "loginSuccessfully": "Login Successfully",
+  "email": "Email",
+  "enterYourEmail": "Enter your e-mail",
+  "password": "Password",
+  "enterPassword": "Enter password",
+  "rememberMe": "Remember me",
+  "forgetpassword": "Forget password?",
+  "dontHaveAccount": "Don't have an account?",
+  "signUp": "Sign up",
+  "countinueAsGuest": "Continue as Guest",
   "passwordMustContainAtLeastOneSpecialCharacter": "Password must contain at least one special character",
   "restrictedAccess": "Restricted Access",
   "guestRestrictionMessage": "This action is not allowed for guest users. Please log in or sign up to continue.",
-  "back": "Back",
-  "login": "Login"
+  "back": "Back"
 }

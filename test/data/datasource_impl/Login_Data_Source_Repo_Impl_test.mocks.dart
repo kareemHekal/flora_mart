@@ -3,12 +3,13 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i4;
+import 'dart:async' as _i3;
 
 import 'package:dio/dio.dart' as _i2;
-import 'package:flora_mart/core/api/api_manager.dart' as _i3;
+import 'package:flora_mart/core/api/api_manager.dart' as _i4;
 import 'package:flora_mart/core/cache/shared_pref.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:mockito/src/dummies.dart' as _i6;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -29,16 +30,21 @@ class _FakeResponse_0<T> extends _i1.SmartFake implements _i2.Response<T> {
     : super(parent, parentInvocation);
 }
 
+class _FakeFuture_1<T1> extends _i1.SmartFake implements _i3.Future<T1> {
+  _FakeFuture_1(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
 /// A class which mocks [ApiManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockApiManager extends _i1.Mock implements _i3.ApiManager {
+class MockApiManager extends _i1.Mock implements _i4.ApiManager {
   MockApiManager() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.Response<dynamic>> getRequest({
+  _i3.Future<_i2.Response<dynamic>> getRequest({
     required String? Endpoint,
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
@@ -49,7 +55,7 @@ class MockApiManager extends _i1.Mock implements _i3.ApiManager {
               #queryParameters: queryParameters,
               #headers: headers,
             }),
-            returnValue: _i4.Future<_i2.Response<dynamic>>.value(
+            returnValue: _i3.Future<_i2.Response<dynamic>>.value(
               _FakeResponse_0<dynamic>(
                 this,
                 Invocation.method(#getRequest, [], {
@@ -60,10 +66,10 @@ class MockApiManager extends _i1.Mock implements _i3.ApiManager {
               ),
             ),
           )
-          as _i4.Future<_i2.Response<dynamic>>);
+          as _i3.Future<_i2.Response<dynamic>>);
 
   @override
-  _i4.Future<_i2.Response<dynamic>> postRequest({
+  _i3.Future<_i2.Response<dynamic>> postRequest({
     required String? endpoint,
     Map<String, dynamic>? body,
     Map<String, dynamic>? headers,
@@ -74,7 +80,7 @@ class MockApiManager extends _i1.Mock implements _i3.ApiManager {
               #body: body,
               #headers: headers,
             }),
-            returnValue: _i4.Future<_i2.Response<dynamic>>.value(
+            returnValue: _i3.Future<_i2.Response<dynamic>>.value(
               _FakeResponse_0<dynamic>(
                 this,
                 Invocation.method(#postRequest, [], {
@@ -85,10 +91,10 @@ class MockApiManager extends _i1.Mock implements _i3.ApiManager {
               ),
             ),
           )
-          as _i4.Future<_i2.Response<dynamic>>);
+          as _i3.Future<_i2.Response<dynamic>>);
 
   @override
-  _i4.Future<_i2.Response<dynamic>> put({
+  _i3.Future<_i2.Response<dynamic>> put({
     required String? Endpoint,
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
@@ -101,7 +107,7 @@ class MockApiManager extends _i1.Mock implements _i3.ApiManager {
               #headers: headers,
               #data: data,
             }),
-            returnValue: _i4.Future<_i2.Response<dynamic>>.value(
+            returnValue: _i3.Future<_i2.Response<dynamic>>.value(
               _FakeResponse_0<dynamic>(
                 this,
                 Invocation.method(#put, [], {
@@ -113,10 +119,10 @@ class MockApiManager extends _i1.Mock implements _i3.ApiManager {
               ),
             ),
           )
-          as _i4.Future<_i2.Response<dynamic>>);
+          as _i3.Future<_i2.Response<dynamic>>);
 
   @override
-  _i4.Future<_i2.Response<dynamic>> delete({
+  _i3.Future<_i2.Response<dynamic>> delete({
     required String? Endpoint,
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
@@ -127,7 +133,7 @@ class MockApiManager extends _i1.Mock implements _i3.ApiManager {
               #queryParameters: queryParameters,
               #headers: headers,
             }),
-            returnValue: _i4.Future<_i2.Response<dynamic>>.value(
+            returnValue: _i3.Future<_i2.Response<dynamic>>.value(
               _FakeResponse_0<dynamic>(
                 this,
                 Invocation.method(#delete, [], {
@@ -138,10 +144,10 @@ class MockApiManager extends _i1.Mock implements _i3.ApiManager {
               ),
             ),
           )
-          as _i4.Future<_i2.Response<dynamic>>);
+          as _i3.Future<_i2.Response<dynamic>>);
 
   @override
-  _i4.Future<_i2.Response<dynamic>> patchRequest({
+  _i3.Future<_i2.Response<dynamic>> patchRequest({
     required String? endpoint,
     Map<String, dynamic>? body,
     Map<String, dynamic>? headers,
@@ -152,7 +158,7 @@ class MockApiManager extends _i1.Mock implements _i3.ApiManager {
               #body: body,
               #headers: headers,
             }),
-            returnValue: _i4.Future<_i2.Response<dynamic>>.value(
+            returnValue: _i3.Future<_i2.Response<dynamic>>.value(
               _FakeResponse_0<dynamic>(
                 this,
                 Invocation.method(#patchRequest, [], {
@@ -163,7 +169,7 @@ class MockApiManager extends _i1.Mock implements _i3.ApiManager {
               ),
             ),
           )
-          as _i4.Future<_i2.Response<dynamic>>);
+          as _i3.Future<_i2.Response<dynamic>>);
 }
 
 /// A class which mocks [CacheHelper].
@@ -175,43 +181,51 @@ class MockCacheHelper extends _i1.Mock implements _i5.CacheHelper {
   }
 
   @override
-  _i4.Future<void> init() =>
+  _i3.Future<void> init() =>
       (super.noSuchMethod(
             Invocation.method(#init, []),
-            returnValue: _i4.Future<void>.value(),
-            returnValueForMissingStub: _i4.Future<void>.value(),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
           )
-          as _i4.Future<void>);
+          as _i3.Future<void>);
 
   @override
-  _i4.Future<bool> checkGuest() =>
+  _i3.Future<bool> checkGuest() =>
       (super.noSuchMethod(
             Invocation.method(#checkGuest, []),
-            returnValue: _i4.Future<bool>.value(false),
+            returnValue: _i3.Future<bool>.value(false),
           )
-          as _i4.Future<bool>);
+          as _i3.Future<bool>);
 
   @override
-  _i4.Future<bool> setData<T>(String? key, T? value) =>
+  _i3.Future<bool> setData<T>(String? key, T? value) =>
       (super.noSuchMethod(
             Invocation.method(#setData, [key, value]),
-            returnValue: _i4.Future<bool>.value(false),
+            returnValue: _i3.Future<bool>.value(false),
           )
-          as _i4.Future<bool>);
+          as _i3.Future<bool>);
 
   @override
-  _i4.Future<T?> getData<T>(String? key) =>
+  _i3.Future<T> getData<T>(String? key) =>
       (super.noSuchMethod(
             Invocation.method(#getData, [key]),
-            returnValue: _i4.Future<T?>.value(),
+            returnValue:
+                _i6.ifNotNull(
+                  _i6.dummyValueOrNull<T>(
+                    this,
+                    Invocation.method(#getData, [key]),
+                  ),
+                  (T v) => _i3.Future<T>.value(v),
+                ) ??
+                _FakeFuture_1<T>(this, Invocation.method(#getData, [key])),
           )
-          as _i4.Future<T?>);
+          as _i3.Future<T>);
 
   @override
-  _i4.Future<bool> removeData(String? key) =>
+  _i3.Future<bool> removeData(String? key) =>
       (super.noSuchMethod(
             Invocation.method(#removeData, [key]),
-            returnValue: _i4.Future<bool>.value(false),
+            returnValue: _i3.Future<bool>.value(false),
           )
-          as _i4.Future<bool>);
+          as _i3.Future<bool>);
 }

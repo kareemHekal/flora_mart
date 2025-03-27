@@ -13,11 +13,16 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
 import '../../data/datasource_contract/guest_datasource.dart' as _i623;
+import '../../data/datasource_contract/Login_Data_Source_Repo.dart' as _i557;
 import '../../data/datasource_impl/guest_datasource_impl.dart' as _i48;
+import '../../data/datasource_impl/Login_Data_Source_Repo_Impl.dart' as _i878;
 import '../../data/repo_impl/guest_repo_impl.dart' as _i905;
+import '../../data/repo_impl/Login_Repo_Impl.dart' as _i722;
 import '../../domain/repo_contract/guest_repo.dart' as _i234;
+import '../../domain/repo_contract/Login_Repo.dart' as _i831;
 import '../../domain/usecase/changeGuest_usecase.dart' as _i285;
 import '../../domain/usecase/check_guest_usecase.dart' as _i304;
+import '../../domain/usecase/login_Usecase.dart' as _i181;
 import '../../presentation/auth/view_model/cubit/auth_cubit.dart' as _i351;
 import '../api/api_manager.dart' as _i1047;
 import '../cache/shared_pref.dart' as _i299;
@@ -37,13 +42,22 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i299.CacheHelper>(() => _i299.CacheHelper());
     gh.factory<_i623.GuestDatasource>(
         () => _i48.GuestDatasourceImpl(gh<_i299.CacheHelper>()));
+    gh.factory<_i557.LoginDataSourceRepo>(() => _i878.LoginDatasourceImpl(
+          gh<_i1047.ApiManager>(),
+          gh<_i299.CacheHelper>(),
+        ));
     gh.factory<_i234.GuestRepo>(
         () => _i905.GuestRepoImpl(gh<_i623.GuestDatasource>()));
+    gh.factory<_i831.LoginRepo>(
+        () => _i722.SigninRepoImpl(gh<_i557.LoginDataSourceRepo>()));
     gh.factory<_i285.ChangeguestUsecase>(
         () => _i285.ChangeguestUsecase(gh<_i234.GuestRepo>()));
     gh.factory<_i304.CheckGuestUseCase>(
         () => _i304.CheckGuestUseCase(gh<_i234.GuestRepo>()));
+    gh.factory<_i181.LoginUsecase>(
+        () => _i181.LoginUsecase(loginRepo: gh<_i831.LoginRepo>()));
     gh.factory<_i351.AuthCubit>(() => _i351.AuthCubit(
+          gh<_i181.LoginUsecase>(),
           gh<_i304.CheckGuestUseCase>(),
           gh<_i285.ChangeguestUsecase>(),
         ));

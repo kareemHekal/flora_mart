@@ -1,5 +1,6 @@
 import 'package:flora_mart/core/cache/shared_pref.dart';
 import 'package:flora_mart/core/constant.dart';
+import 'package:flora_mart/core/di/di.dart';
 import 'package:flora_mart/core/resuable_comp/custom_text_field.dart';
 import 'package:flora_mart/core/resuable_comp/text_button.dart';
 import 'package:flora_mart/core/resuable_comp/toast_message.dart';
@@ -26,6 +27,7 @@ class _SignInScreenState extends State<SignInScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final cacheHelper = getIt<CacheHelper>();
 
   void _validateAndLogin(BuildContext context) {
     if (_formKey.currentState!.validate()) {
@@ -46,7 +48,7 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   void setTokenNull() async {
-    await CacheHelper.removeData(Constant.tokenKey);
+    await cacheHelper.removeData(Constant.tokenKey);
   }
 
   @override

@@ -17,15 +17,6 @@ class AppStrings {
   static String get lastNameCannotBeMoreThan20Characters => "lastNameCannotBeMoreThan20Characters".tr();
   static String get phoneNumberCannotBeEmpty => "phoneNumberCannotBeEmpty".tr();
   static String get phoneNumberCannotBeMoreThan20Characters => "phoneNumberCannotBeMoreThan20Characters".tr();
-  static String get passwordMustContainAtLeastOneSpecialCharacter => "passwordMustContainAtLeastOneSpecialCharacter".tr();
-  static String get restrictedAccess => "restrictedAccess".tr();
-  static String get guestRestrictionMessage => "guestRestrictionMessage".tr();
-  static String get back => "back".tr();
-  static String get login => "login".tr();
-  static String get phoneNumberCannotBeMoreThan20Characters =>
-      "phoneNumberCannotBeMoreThan20Characters".tr();
-  static String get passwordMustContainAtLeastOneSpecialCharacter =>
-      "passwordMustContainAtLeastOneSpecialCharacter".tr();
   static String get login => "login".tr();
   static String get loginSuccessfully => "loginSuccessfully".tr();
   static String get email => "email".tr();
@@ -37,4 +28,8 @@ class AppStrings {
   static String get dontHaveAccount => "dontHaveAccount".tr();
   static String get signUp => "signUp".tr();
   static String get countinueAsGuest => "countinueAsGuest".tr();
+  static String get passwordMustContainAtLeastOneSpecialCharacter => "passwordMustContainAtLeastOneSpecialCharacter".tr();
+  static String get restrictedAccess => "restrictedAccess".tr();
+  static String get guestRestrictionMessage => "guestRestrictionMessage".tr();
+  static String get back => "back".tr();
 }

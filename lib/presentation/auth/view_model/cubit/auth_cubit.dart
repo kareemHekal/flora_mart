@@ -1,5 +1,9 @@
 import 'dart:developer';
 
+import 'package:flora_mart/core/cache/shared_pref.dart';
+import 'package:flora_mart/core/constant.dart';
+import 'package:flora_mart/core/di/di.dart';
+import 'package:flora_mart/core/utils/routes_manager.dart';
 import 'package:flora_mart/domain/common/result.dart';
 import 'package:flora_mart/domain/usecase/changeGuest_usecase.dart';
 import 'package:flora_mart/domain/usecase/check_guest_usecase.dart';
@@ -19,15 +23,17 @@ class AuthCubit extends Cubit<AuthState> {
   final CheckGuestUseCase checkGuestUseCase;
   final ChangeguestUsecase changeGuestUsecase;
   @factoryMethod
- final LoginUsecase signInUsecase;
-  AuthCubit(this.signInUsecase,this.checkGuestUseCase, this.changeGuestUsecase) : super(AuthInitial());
+  final LoginUsecase signInUsecase;
+  String? startRoute;
+  final cacheHelper = getIt<CacheHelper>();
 
+  AuthCubit(this.signInUsecase, this.checkGuestUseCase, this.changeGuestUsecase)
       : super(AuthInitial());
 
   void doIntent(AuthIntent authIntent) {
     switch (authIntent) {
       case SignInIntent():
-        _SignIn(intent: intent);
+        _SignIn(intent: authIntent);
         break;
       case CheckGuestIntent():
         _checkGuest();
@@ -35,12 +41,16 @@ class AuthCubit extends Cubit<AuthState> {
       case ChangeGuestIntent():
         _changeGuest(intent: authIntent);
         break;
+      case CheckAuthIntent():
+        _CheekAuth();
+        break;
     }
   }
 
   static AuthCubit get(context) => BlocProvider.of(context);
 
   bool? isguest = false;
+
   _checkGuest() async {
     var result = await checkGuestUseCase.call();
     switch (result) {
@@ -74,6 +84,7 @@ class AuthCubit extends Cubit<AuthState> {
     switch (result) {
       case SuccessApiResult():
         emit(LoginSuccessState(userModel: result.data));
+        _changeGuest(intent: ChangeGuestIntent(isGuest: false));
         break;
       case ErrorApiResult():
         print("${result.exception.toString()} Error ⛔⛔");
@@ -81,4 +92,20 @@ class AuthCubit extends Cubit<AuthState> {
         break;
     }
   }
+  Future<bool> getRememberMe() async {
+    return await cacheHelper.getData<bool>(Constant.isRememberMe);
+  }
+  _CheekAuth() async {
+    bool rememberMe = await getRememberMe();
+    if (rememberMe == true) {
+      startRoute = RouteManager.homeScreen;
+      log(startRoute.toString());
+    } else {
+      startRoute = RouteManager.loginScreen;
+      log(startRoute.toString());
+    }
+    print("$startRoute ⭐⭐⭐  cubit");
+
+  }
+
 }
