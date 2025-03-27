@@ -2,18 +2,26 @@ import 'package:flora_mart/core/utils/colors_manager.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
-  TextEditingController controller;
-  TextInputType? keyboard;
-  String labelText;
-  String? hintText;
-  bool obscureText;
-  String? Function(String?)? validator;
-  String obscuringCharacter;
+  final TextEditingController controller;
+  final TextInputType? keyboard;
+  final String labelText;
+  final String? hintText;
+  final bool obscureText;
+  final String obscuringCharacter;
+  final String? Function(String?)? validator;
+  final Widget? suffixIcon;
 
-  CustomTextField(
-      {required this.labelText, this.hintText,
-        required this.controller, this.keyboard, this.validator, this.obscureText=false,
-        this.obscuringCharacter = '*'});
+  const CustomTextField({
+    required this.labelText,
+    this.hintText,
+    required this.controller,
+    this.keyboard,
+    this.validator,
+    this.obscureText = false,
+    this.obscuringCharacter = '*',
+    this.suffixIcon,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,30 +32,21 @@ class CustomTextField extends StatelessWidget {
       obscureText: obscureText,
       obscuringCharacter: obscuringCharacter,
       decoration: InputDecoration(
-          labelText: labelText,
-          labelStyle: Theme.of(context).textTheme.labelSmall,
-          floatingLabelBehavior: FloatingLabelBehavior.always,
-          hintText: hintText,
-          hintStyle: TextStyle(
-            color: Colors.grey,
-            fontSize: 12,
+        labelText: labelText,
+        labelStyle: Theme.of(context).textTheme.labelSmall,
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        hintText: hintText,
+        hintStyle: Theme.of(context).textTheme.labelMedium,
+        suffixIcon: suffixIcon,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(4),
+          borderSide: const BorderSide(
+            style: BorderStyle.none,
+            width: 4,
+            color: Color(0xff535353),
           ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: ColorManager.primaryColor, width: 1.0), // لون الإطار عند الضغط
-            borderRadius: BorderRadius.circular(10),
-          ),
-          //hintStyle: Theme.of(context).textTheme.labelMedium,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(
-              4,
-            ),
-            borderSide: BorderSide(
-                style: BorderStyle.none,
-                width: 4,
-                color: Color(
-                  0xff535353,
-                )),
-          )),
+        ),
+      ),
     );
   }
 }
