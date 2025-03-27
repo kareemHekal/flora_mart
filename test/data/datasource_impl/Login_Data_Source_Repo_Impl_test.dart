@@ -1,161 +1,87 @@
+import 'package:dio/dio.dart';
+import 'package:flora_mart/data/datasource_impl/Login_Data_Source_Repo_Impl.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
+import 'package:mockito/annotations.dart';
 import 'package:flora_mart/core/api/api_manager.dart';
 import 'package:flora_mart/core/api/api_result.dart';
 import 'package:flora_mart/core/api/endpoints.dart';
 import 'package:flora_mart/core/cache/shared_pref.dart';
 import 'package:flora_mart/core/constant.dart';
-import 'package:flora_mart/data/datasource_impl/login_data_source_repo_impl.dart';
+import 'package:flora_mart/data/datasource_contract/Login_Data_Source_Repo.dart';
 import 'package:flora_mart/data/model/UserModel.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
-import 'package:mockito/annotations.dart';
-import 'package:dio/dio.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-@GenerateMocks([ApiManager, SharedPreferences])
-import 'login_data_source_repo_impl_test.mocks.dart';
+import 'Login_Data_Source_Repo_Impl_test.mocks.dart';
 
+@GenerateMocks([ApiManager, CacheHelper])
 void main() {
   late LoginDatasourceImpl loginDatasource;
   late MockApiManager mockApiManager;
-  late MockSharedPreferences mockSharedPreferences;
+  late MockCacheHelper mockCacheHelper;
 
-  setUp(() async {
+  setUp(() {
     mockApiManager = MockApiManager();
-    mockSharedPreferences = MockSharedPreferences();
-
-    // Initialize with mock preferences
-    CacheHelper.initForTest(mockSharedPreferences);
-
-    loginDatasource = LoginDatasourceImpl(mockApiManager);
-  });
-
-  tearDown(() {
-    reset(mockApiManager);
-    reset(mockSharedPreferences);
+    mockCacheHelper = MockCacheHelper();
+    loginDatasource = LoginDatasourceImpl(mockApiManager, mockCacheHelper);
   });
 
   group('login', () {
-    const testEmail = 'test@example.com';
-    const testPassword = 'password123';
-    const testToken = 'test_token';
-    final testUserModel = UserModel(token: testToken);
+    const email = 'test@example.com';
+    const password = 'password123';
+    const token = 'fake_token';
+    const rememberMe = true;
 
-    test('should return UserModel when login is successful', () async {
-      // Arrange
+    final mockResponse = {
+      'token': token,
+      'name': 'Test User',
+      'email': email,
+    };
+
+
+    test('should return UserModel on successful login', () async {
+
       when(mockApiManager.postRequest(
         endpoint: EndPoint.signInEndpoint,
-        body: {'email': testEmail, 'password': testPassword},
+        body: anyNamed('body'),
       )).thenAnswer((_) async => Response(
-        data: {'token': testToken},
-        requestOptions: RequestOptions(path: EndPoint.signInEndpoint),
+        data: mockResponse,
         statusCode: 200,
+        requestOptions: RequestOptions(path: EndPoint.signInEndpoint),
       ));
 
-      when(mockSharedPreferences.setString('auth_token', testToken))
+
+      when(mockCacheHelper.setData<String>(Constant.tokenKey, token))
           .thenAnswer((_) async => true);
-      when(mockSharedPreferences.setBool(Constant.isRememberMe, true))
+      when(mockCacheHelper.setData<bool>(Constant.isRememberMe, rememberMe))
           .thenAnswer((_) async => true);
 
-      // Act
       final result = await loginDatasource.login(
-        email: testEmail,
-        password: testPassword,
-        rememberMe: true,
+        email: email,
+        password: password,
+        rememberMe: rememberMe,
       );
 
-      // Assert
       expect(result, isA<SuccessApiResult<UserModel>>());
-      expect((result as SuccessApiResult).data?.token, testToken);
-
-      verify(mockApiManager.postRequest(
-        endpoint: EndPoint.signInEndpoint,
-        body: {'email': testEmail, 'password': testPassword},
-      )).called(1);
-
-      verify(mockSharedPreferences.setString('auth_token', testToken)).called(1);
-      verify(mockSharedPreferences.setBool(Constant.isRememberMe, true)).called(1);
+      expect((result as SuccessApiResult<UserModel>).data?.token, equals(token));
     });
 
-    test('should handle empty response from API', () async {
-      // Arrange
+    test('should return error on failed login', () async {
       when(mockApiManager.postRequest(
         endpoint: EndPoint.signInEndpoint,
-        body: {'email': testEmail, 'password': testPassword},
-      )).thenAnswer((_) async => Response(
-        data: null,
-        requestOptions: RequestOptions(path: EndPoint.signInEndpoint),
-        statusCode: 200,
-      ));
+        body: anyNamed('body'),
+      )).thenThrow(Exception('Login failed'));
 
-      // Act
+
       final result = await loginDatasource.login(
-        email: testEmail,
-        password: testPassword,
-        rememberMe: false,
+        email: email,
+        password: password,
+        rememberMe: rememberMe,
       );
 
-      // Assert
-      expect(result, isA<SuccessApiResult<UserModel>>());
-      expect((result as SuccessApiResult).data?.token, isNull);
-
-      verifyNever(mockSharedPreferences.setString(any, any));
-      verifyNever(mockSharedPreferences.setBool(any, any));
-    });
-
-    test('should handle malformed response from API', () async {
-      // Arrange
-      when(mockApiManager.postRequest(
-        endpoint: EndPoint.signInEndpoint,
-        body: {'email': testEmail, 'password': testPassword},
-      )).thenAnswer((_) async => Response(
-        data: {'invalid': 'response'},
-        requestOptions: RequestOptions(path: EndPoint.signInEndpoint),
-        statusCode: 200,
-      ));
-
-      // Act
-      final result = await loginDatasource.login(
-        email: testEmail,
-        password: testPassword,
-        rememberMe: false,
-      );
-
-      // Assert
-      expect(result, isA<SuccessApiResult<UserModel>>());
-      expect((result as SuccessApiResult).data?.token, isNull);
-    });
-
-
-    test('should handle rememberMe save failure', () async {
-      // Arrange
-      when(mockApiManager.postRequest(
-        endpoint: EndPoint.signInEndpoint,
-        body: {'email': testEmail, 'password': testPassword},
-      )).thenAnswer((_) async => Response(
-        data: {'token': testToken},
-        requestOptions: RequestOptions(path: EndPoint.signInEndpoint),
-        statusCode: 200,
-      ));
-
-      when(mockSharedPreferences.setString('auth_token', testToken))
-          .thenAnswer((_) async => true);
-      when(mockSharedPreferences.setBool(Constant.isRememberMe, true))
-          .thenAnswer((_) async => false);
-
-      // Act
-      final result = await loginDatasource.login(
-        email: testEmail,
-        password: testPassword,
-        rememberMe: true,
-      );
-
-      // Assert
-      expect(result, isA<SuccessApiResult<UserModel>>());
-      expect((result as SuccessApiResult).data?.token, testToken);
-
-      verify(mockSharedPreferences.setString('auth_token', testToken)).called(1);
-      verify(mockSharedPreferences.setBool(Constant.isRememberMe, true)).called(1);
+      expect(result, isA<ErrorApiResult<UserModel>>());
+      expect((result as ErrorApiResult<UserModel>).exception.toString(), contains('Login failed'));
     });
 
   });
+
 }

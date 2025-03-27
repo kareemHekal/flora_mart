@@ -11,9 +11,10 @@ import 'package:injectable/injectable.dart';
 @Injectable(as: LoginDataSourceRepo)
 class LoginDatasourceImpl implements LoginDataSourceRepo {
   final ApiManager apiManager;
+  final CacheHelper cacheHelper;
 
   @factoryMethod
-  LoginDatasourceImpl(this.apiManager);
+  LoginDatasourceImpl(this.apiManager, this.cacheHelper);
 
   @override
   Future<ApiResult<UserModel>> login({
@@ -38,14 +39,14 @@ class LoginDatasourceImpl implements LoginDataSourceRepo {
         var response = UserModel.fromJson(apiResponse.data ?? {});
         // ============ Save Token ===============\\
         if (response.token != null) {
-          bool setToken = await CacheHelper.setData<String>(
+          bool setToken = await cacheHelper.setData<String>(
               Constant.tokenKey, response.token ?? "");
           if (setToken) {
             print('Token saved: ${response.token} ✅✅');
             // ========== Remember me Token  ========= \\
 
-            bool setRememberMe = await CacheHelper.setData<bool>(
-                Constant.isRememberMe, rememberMe ? rememberMe : false);
+            bool setRememberMe = await cacheHelper.setData<bool>(
+                Constant.isRememberMe, rememberMe==true ? rememberMe : false);
 
             setRememberMe
                 ? print('isRememberMe saved: ${rememberMe} ✅✅')

@@ -3,14 +3,18 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i4;
+import 'dart:async' as _i5;
 
-import 'package:flora_mart/domain/common/result.dart' as _i5;
+import 'package:flora_mart/core/api/api_result.dart' as _i10;
+import 'package:flora_mart/data/model/UserModel.dart' as _i11;
+import 'package:flora_mart/domain/common/result.dart' as _i6;
 import 'package:flora_mart/domain/repo_contract/guest_repo.dart' as _i2;
-import 'package:flora_mart/domain/usecase/changeGuest_usecase.dart' as _i7;
-import 'package:flora_mart/domain/usecase/check_guest_usecase.dart' as _i3;
+import 'package:flora_mart/domain/repo_contract/Login_Repo.dart' as _i3;
+import 'package:flora_mart/domain/usecase/changeGuest_usecase.dart' as _i8;
+import 'package:flora_mart/domain/usecase/check_guest_usecase.dart' as _i4;
+import 'package:flora_mart/domain/usecase/login_Usecase.dart' as _i9;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i6;
+import 'package:mockito/src/dummies.dart' as _i7;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -31,10 +35,15 @@ class _FakeGuestRepo_0 extends _i1.SmartFake implements _i2.GuestRepo {
     : super(parent, parentInvocation);
 }
 
+class _FakeLoginRepo_1 extends _i1.SmartFake implements _i3.LoginRepo {
+  _FakeLoginRepo_1(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
 /// A class which mocks [CheckGuestUseCase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockCheckGuestUseCase extends _i1.Mock implements _i3.CheckGuestUseCase {
+class MockCheckGuestUseCase extends _i1.Mock implements _i4.CheckGuestUseCase {
   MockCheckGuestUseCase() {
     _i1.throwOnMissingStub(this);
   }
@@ -48,24 +57,24 @@ class MockCheckGuestUseCase extends _i1.Mock implements _i3.CheckGuestUseCase {
           as _i2.GuestRepo);
 
   @override
-  _i4.Future<_i5.Result<bool>> call() =>
+  _i5.Future<_i6.Result<bool>> call() =>
       (super.noSuchMethod(
             Invocation.method(#call, []),
-            returnValue: _i4.Future<_i5.Result<bool>>.value(
-              _i6.dummyValue<_i5.Result<bool>>(
+            returnValue: _i5.Future<_i6.Result<bool>>.value(
+              _i7.dummyValue<_i6.Result<bool>>(
                 this,
                 Invocation.method(#call, []),
               ),
             ),
           )
-          as _i4.Future<_i5.Result<bool>>);
+          as _i5.Future<_i6.Result<bool>>);
 }
 
 /// A class which mocks [ChangeguestUsecase].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockChangeguestUsecase extends _i1.Mock
-    implements _i7.ChangeguestUsecase {
+    implements _i8.ChangeguestUsecase {
   MockChangeguestUsecase() {
     _i1.throwOnMissingStub(this);
   }
@@ -79,10 +88,52 @@ class MockChangeguestUsecase extends _i1.Mock
           as _i2.GuestRepo);
 
   @override
-  _i4.Future<bool> call({required bool? isGuest}) =>
+  _i5.Future<bool> call({required bool? isGuest}) =>
       (super.noSuchMethod(
             Invocation.method(#call, [], {#isGuest: isGuest}),
-            returnValue: _i4.Future<bool>.value(false),
+            returnValue: _i5.Future<bool>.value(false),
           )
-          as _i4.Future<bool>);
+          as _i5.Future<bool>);
+}
+
+/// A class which mocks [LoginUsecase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockLoginUsecase extends _i1.Mock implements _i9.LoginUsecase {
+  MockLoginUsecase() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i3.LoginRepo get loginRepo =>
+      (super.noSuchMethod(
+            Invocation.getter(#loginRepo),
+            returnValue: _FakeLoginRepo_1(this, Invocation.getter(#loginRepo)),
+          )
+          as _i3.LoginRepo);
+
+  @override
+  _i5.Future<_i10.ApiResult<_i11.UserModel>> invoke({
+    required String? email,
+    required bool? rememberMe,
+    required String? password,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#invoke, [], {
+              #email: email,
+              #rememberMe: rememberMe,
+              #password: password,
+            }),
+            returnValue: _i5.Future<_i10.ApiResult<_i11.UserModel>>.value(
+              _i7.dummyValue<_i10.ApiResult<_i11.UserModel>>(
+                this,
+                Invocation.method(#invoke, [], {
+                  #email: email,
+                  #rememberMe: rememberMe,
+                  #password: password,
+                }),
+              ),
+            ),
+          )
+          as _i5.Future<_i10.ApiResult<_i11.UserModel>>);
 }
