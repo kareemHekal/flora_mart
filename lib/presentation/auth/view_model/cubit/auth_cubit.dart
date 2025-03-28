@@ -16,17 +16,11 @@ import 'package:flora_mart/domain/usecase/login_Usecase.dart';
 import 'package:flora_mart/presentation/auth/view_model/cubit/auth_intent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:bloc/bloc.dart';
-import 'package:flora_mart/core/utils/routes_manager.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../../../core/api/api_result.dart';
 import '../../../../../../domain/usecase/forget_password_usecases/forget_password_usecase.dart';
 import '../../../../../../domain/usecase/forget_password_usecases/reset_password_usecase.dart';
 import '../../../../../../domain/usecase/forget_password_usecases/verify_reset_code_usecase.dart';
-import 'auth_intent.dart';
 
 part 'auth_state.dart';
 
@@ -210,9 +204,12 @@ class AuthCubit extends Cubit<AuthState> {
       gender: intent.gender,
     );
 
-    result.fold(
-      (failureMessage) => emit(RegisterViewModelFailure(failureMessage)),
-      (response) => emit(RegisterViewModelSuccess(response)),
-    );
+    if (result is SuccessApiResult<AuthResponseEntity>) {
+      emit(RegisterViewModelSuccess(result.data!));
+    } else if (result is ErrorApiResult<AuthResponseEntity>) {
+      emit(RegisterViewModelFailure(result.exception.toString()));
+    } else {
+      emit(RegisterViewModelFailure("Unknown error occurred"));
+    }
   }
 }
