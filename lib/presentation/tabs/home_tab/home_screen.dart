@@ -1,15 +1,6 @@
-
-import 'package:flora_mart/config/theme/app_theme.dart';
-import 'package:flora_mart/core/utils/colors_manager.dart';
-import 'package:flora_mart/presentation/tabs/cart_tab/cart_screen.dart';
-import 'package:flora_mart/presentation/tabs/categories_tab/categories_screen.dart';
-import 'package:flora_mart/presentation/tabs/profile_tab/profile_screen.dart';
-import 'package:flutter/cupertino.dart';
-
 import 'package:flora_mart/core/resuable_comp/dialogs.dart';
 import 'package:flora_mart/presentation/auth/view_model/cubit/auth_cubit.dart';
 import 'package:flora_mart/presentation/auth/view_model/cubit/auth_intent.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,12 +14,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-
-
     //📌📌📌 This code explains the process of changing the value of a guest and 📌📌📌
     //📌📌📌 checking whether it is a guest or not.📌📌📌
-
-
 
     return Scaffold(
       body: BlocListener<AuthCubit, AuthState>(
@@ -75,7 +62,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
-
       ),
     );
   }
