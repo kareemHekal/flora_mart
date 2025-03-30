@@ -85,9 +85,18 @@ class AppTheme {
     // 🏠 تصميم شريط التنقل السفلي (Bottom Navigation Bar)
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: Colors.white,
-      selectedItemColor: Colors.pinkAccent,
+      selectedItemColor: ColorManager.primaryColor,
       unselectedItemColor: Colors.black54,
       showUnselectedLabels: true,
+    ),
+
+    tabBarTheme: TabBarTheme(
+      labelColor: ColorManager.primaryColor,
+      dividerColor: Colors.transparent,
+      indicatorSize: TabBarIndicatorSize.tab,
+      indicatorColor: ColorManager.primaryColor,
+      unselectedLabelColor: Colors.grey,
+      tabAlignment: TabAlignment.start,
     ),
 
     // 🛒 تصميم بطاقات المنتجات (Cards)
