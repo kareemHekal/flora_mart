@@ -58,6 +58,7 @@ dependencies:
   easy_localization: ^3.0.7+1
   mockito: ^5.4.5
   bloc_test: ^10.0.0
+  skeletonizer: ^1.4.3
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -121,3 +122,10 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+flutter_assets:
+  assets_path: assets/images/
+  output_path: lib/core/utils/
+  filename: assets_manager.dart
+  field_prefix:
+  ignore_comments: true
+  classname: AssetsManager

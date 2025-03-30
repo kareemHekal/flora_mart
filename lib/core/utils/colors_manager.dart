@@ -2,6 +2,13 @@ import 'package:flutter/material.dart';
 
 class ColorManager {
   static const Color primaryColor = Colors.pinkAccent;
+  static const Color secondaryColor = Colors.pink;
+  static const Color backgroundColor = Colors.white;
+  static const Color borderColor = Colors.black;
+  static const Color textColor = Colors.black;
+  static const Color errorColor = Colors.red;
+  static const Color disabledColor = Colors.grey;
+  static const Color addToCartButtonColor = Color(0xffD21E6A);
 
   //==================================== Const Colors ====================================//
   static const white = Color(0xffF9F9F9);

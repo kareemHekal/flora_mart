@@ -39,7 +39,7 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
         obscureText: _obscureText,
         decoration: getInputDecoration(context, widget.label,
             widget.placeholder ?? AppStrings.enterYourPassword // ✅ الحل هنا
-        ),
+            ),
       ),
     );
   }

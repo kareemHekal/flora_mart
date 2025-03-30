@@ -33,12 +33,12 @@ class _SignInScreenState extends State<SignInScreen> {
   void _validateAndLogin(BuildContext context) {
     if (_formKey.currentState!.validate()) {
       context.read<AuthCubit>().doIntent(
-        SignInIntent(
-          rememberMe: isChecked,
-          email: emailController.text,
-          password: passwordController.text,
-        ),
-      );
+            SignInIntent(
+              rememberMe: isChecked,
+              email: emailController.text,
+              password: passwordController.text,
+            ),
+          );
     }
   }
 
@@ -127,12 +127,17 @@ class _SignInScreenState extends State<SignInScreen> {
                           Row(
                             children: [
                               Checkbox(
-                                fillColor: WidgetStateProperty.resolveWith<Color>(
-                                      (Set<WidgetState> states) {
-                                    return isChecked ? ColorManager.pinkBase : ColorManager.white;
+                                fillColor:
+                                    WidgetStateProperty.resolveWith<Color>(
+                                  (Set<WidgetState> states) {
+                                    return isChecked
+                                        ? ColorManager.pinkBase
+                                        : ColorManager.white;
                                   },
                                 ),
-                                checkColor: isChecked ? ColorManager.white : ColorManager.pinkBase,
+                                checkColor: isChecked
+                                    ? ColorManager.white
+                                    : ColorManager.pinkBase,
                                 value: isChecked,
                                 onChanged: (bool? newValue) {
                                   setState(() {
@@ -149,14 +154,18 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                           InkWell(
                             onTap: () {
-                              Navigator.pushNamed(context, RouteManager.forgetPasswordScreen);
+                              Navigator.pushNamed(
+                                  context, RouteManager.forgetPasswordScreen);
                             },
                             child: Text(
                               AppStrings.forgetpassword,
-                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                decoration: TextDecoration.underline,
-                                decorationThickness: 2.0,
-                              ),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.copyWith(
+                                    decoration: TextDecoration.underline,
+                                    decorationThickness: 2.0,
+                                  ),
                             ),
                           ),
                         ],
@@ -189,8 +198,8 @@ class _SignInScreenState extends State<SignInScreen> {
                           SizedBox(width: 5.w),
                           InkWell(
                             onTap: () {
-                              Navigator.pushReplacementNamed(context, RouteManager.registerScreen);
-
+                              Navigator.pushReplacementNamed(
+                                  context, RouteManager.registerScreen);
                             },
                             child: Text(
                               AppStrings.signUp,

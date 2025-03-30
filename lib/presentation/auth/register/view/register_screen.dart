@@ -1,7 +1,6 @@
 import 'package:flora_mart/config/theme/app_theme.dart';
 import 'package:flora_mart/core/constant.dart';
 import 'package:flora_mart/core/di/di.dart';
-import 'package:flora_mart/core/resuable_comp/app_bar.dart';
 import 'package:flora_mart/core/resuable_comp/custom_text_field.dart';
 import 'package:flora_mart/core/resuable_comp/text_button.dart';
 import 'package:flora_mart/core/utils/colors_manager.dart';
@@ -48,9 +47,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       create: (context) => getIt<AuthCubit>(),
       child: Scaffold(
         appBar: AppBar(
-
           title: Text(AppStrings.signUp),
-
         ),
         body: Padding(
           padding: const EdgeInsets.all(25),
@@ -59,7 +56,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-
                   const SizedBox(height: 25),
                   Row(
                     children: [
@@ -255,11 +251,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(AppStrings.bySigningUp,
+                      Text(AppStrings.bySigningUpYouAgreeToOur,
                           style: TextStyle(fontSize: 12)),
                       GestureDetector(
                         onTap: () {},
-                        child: Text(AppStrings.terms,
+                        child: Text(AppStrings.termsandConditions,
                             style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,
@@ -314,7 +310,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           style: TextStyle(fontSize: 17)),
                       InkWell(
                         onTap: () {
-                          Navigator.pushReplacementNamed(context, RouteManager.loginScreen);
+                          Navigator.pushReplacementNamed(
+                              context, RouteManager.loginScreen);
                         },
                         child: Text(AppStrings.login,
                             style: TextStyle(
