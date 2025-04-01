@@ -1,4 +1,5 @@
 import 'package:flora_mart/core/resuable_comp/flower_card_resuble/flower_card_builder.dart';
+import 'package:flora_mart/data/model/products/Products.dart';
 import 'package:flutter/material.dart';
 
 class CategoriesScreen extends StatelessWidget {
@@ -91,21 +92,4 @@ class CategoriesScreen extends StatelessWidget {
     ];
     return FlowerCardBuilder(products: products); //this is a custom widget
   }
-}
-
-class Products {
-  //this is a custom class for testing but the response from api like this
-  Products({
-    this.title,
-    this.price,
-    this.priceAfterDiscount,
-    this.discount,
-    this.imgCover,
-  });
-
-  String? title;
-  String? imgCover;
-  num? price;
-  num? priceAfterDiscount;
-  num? discount;
 }
