@@ -72,13 +72,13 @@ class FlowerCard extends StatelessWidget {
                 // spacing: 5,
                 children: [
                   Text(
-                    "EGP ${price ?? "0"}",
+                    "EGP ${priceAfterDiscount ?? "0"}",
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   SizedBox(width: Config.screenWidth! * 0.02),
                   Flexible(
-                      child: Text("${priceAfterDiscount ?? "0"}",
+                      child: Text("${price ?? "0"}",
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             decoration: TextDecoration.lineThrough,
