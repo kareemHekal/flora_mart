@@ -9,7 +9,8 @@ import 'widgets/Category widget.dart';
 import 'widgets/occasion_widget.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final VoidCallback onViewAllTapped;
+  const HomeScreen({required this.onViewAllTapped, super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -20,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: Row(
           children: [
             Image.asset(
@@ -66,13 +68,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       Spacer(),
-                      Text(
-                        AppStrings.viewAll,
-                        style: TextStyle(
-                          decoration: TextDecoration.underline,
-                          decorationColor: ColorManager.pinkBase,
-                          decorationThickness: 2.0,
-                          color: ColorManager.pinkBase,
+                      GestureDetector(
+                        onTap: widget.onViewAllTapped,
+                        child: Text(
+                          AppStrings.viewAll,
+                          style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            decorationColor: ColorManager.pinkBase,
+                            decorationThickness: 2.0,
+                            color: ColorManager.pinkBase,
+                          ),
                         ),
                       ),
                     ],
@@ -140,7 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Row(
                     children: [
                       Text(
-                        AppStrings.bestSeller,
+                        AppStrings.occasion,
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       Spacer(),
@@ -156,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                   SizedBox(
-                    height: 220,
+                    height: 200,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: 20,
