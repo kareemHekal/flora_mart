@@ -79,5 +79,6 @@
   "rate": "Rate",
   "instock": "In stock",
   "outofstock": "out of stock",
-  "people": "People"
+  "people": "People",
+  "addedtocart": "Added to cart"
 }

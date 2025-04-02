@@ -1,4 +1,6 @@
 import 'package:flora_mart/core/resuable_comp/flower_card_resuble/flower_card.dart';
+import 'package:flora_mart/core/resuable_comp/toast_message.dart';
+import 'package:flora_mart/core/utils/string_manager.dart';
 import 'package:flora_mart/data/model/products/Products.dart';
 import 'package:flora_mart/presentation/product_details/product_details_screen.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +35,11 @@ class FlowerCardBuilder extends StatelessWidget {
             priceAfterDiscount: products[index].priceAfterDiscount,
             imgCover: products[index].imgCover,
             title: products[index].title,
-            onTap: () {},
+            onTap: () {
+              toastMessage(
+                  message: AppStrings.addedtocart,
+                  tybeMessage: TybeMessage.positive);
+            },
           ),
         ),
         itemCount: products.length,

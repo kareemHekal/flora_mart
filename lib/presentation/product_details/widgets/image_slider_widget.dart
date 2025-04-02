@@ -28,11 +28,13 @@ class _ImageSliderWidgetState extends State<ImageSliderWidget> {
           options: CarouselOptions(
             height: Config.screenHight! * 0.38,
             aspectRatio: 16 / 9,
-            viewportFraction: 1,
+            viewportFraction: 1.1,
             enableInfiniteScroll: false,
             autoPlay: true,
             autoPlayInterval: Duration(seconds: 3),
             autoPlayCurve: Curves.slowMiddle,
+            scrollPhysics: BouncingScrollPhysics(),
+            disableCenter: true,
             onPageChanged: (index, reason) {
               setState(() {
                 currentIndex = index; // تحديث المؤشر عند التغيير
@@ -66,12 +68,14 @@ class _ImageSliderWidgetState extends State<ImageSliderWidget> {
         ),
         // زر الرجوع في الأعلى
         Positioned(
-          top: 10, // هامش من الأعلى
+          top: 0, // هامش من الأعلى
           left: 10, // هامش من اليسار
-          child: IconButton(
-            onPressed: () => Navigator.pop(context),
-            icon: Icon(
-              Icons.arrow_back_ios_new,
+          child: SafeArea(
+            child: IconButton(
+              onPressed: () => Navigator.pop(context),
+              icon: Icon(
+                Icons.arrow_back_ios_new,
+              ),
             ),
           ),
         ),
