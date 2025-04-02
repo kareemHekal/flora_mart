@@ -64,6 +64,17 @@ class _ImageSliderWidgetState extends State<ImageSliderWidget> {
             );
           }).toList(),
         ),
+        // زر الرجوع في الأعلى
+        Positioned(
+          top: 10, // هامش من الأعلى
+          left: 10, // هامش من اليسار
+          child: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: Icon(
+              Icons.arrow_back_ios_new,
+            ),
+          ),
+        ),
         Container(
           margin: EdgeInsets.only(bottom: 10),
           child: AnimatedSmoothIndicator(
