@@ -1,5 +1,6 @@
 import 'package:flora_mart/core/resuable_comp/flower_card_resuble/flower_card.dart';
 import 'package:flora_mart/data/model/products/Products.dart';
+import 'package:flora_mart/presentation/product_details/product_details_screen.dart';
 import 'package:flutter/material.dart';
 
 class FlowerCardBuilder extends StatelessWidget {
@@ -17,13 +18,23 @@ class FlowerCardBuilder extends StatelessWidget {
           crossAxisSpacing: 17,
           mainAxisSpacing: 17,
         ),
-        itemBuilder: (context, index) => FlowerCard(
-          discount: products[index].discount,
-          price: products[index].price,
-          priceAfterDiscount: products[index].priceAfterDiscount,
-          imgCover: products[index].imgCover,
-          title: products[index].title,
-          onTap: () {},
+        itemBuilder: (context, index) => InkWell(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      ProductDetailsScreen(product: products[index]),
+                ));
+          },
+          child: FlowerCard(
+            discount: products[index].discount,
+            price: products[index].price,
+            priceAfterDiscount: products[index].priceAfterDiscount,
+            imgCover: products[index].imgCover,
+            title: products[index].title,
+            onTap: () {},
+          ),
         ),
         itemCount: products.length,
       ),
