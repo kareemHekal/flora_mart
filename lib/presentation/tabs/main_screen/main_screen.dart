@@ -27,7 +27,7 @@ class _MainScreenState extends State<MainScreen> {
       body: IndexedStack(
         index: _selectedIndex,
         children: [
-          HomeScreen(onViewAllTapped: () => _onItemTapped(1)), // اضغط يروح للتاب الثانية
+          HomeScreen(onViewAllTapped: () => _onItemTapped(1)),
           CategoriesScreen(),
           CartScreen(),
           ProfileScreen(),
