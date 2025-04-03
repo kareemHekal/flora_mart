@@ -74,4 +74,12 @@ class AppStrings {
   static String get alreadyHaveAnAccount => "alreadyHaveAnAccount".tr();
   static String get loginSuccessfully => "loginSuccessfully".tr();
   static String get addtocart => "addtocart".tr();
+  static String get status => "status".tr();
+  static String get allpricesincludetax => "allpricesincludetax".tr();
+  static String get description => "description".tr();
+  static String get rate => "rate".tr();
+  static String get instock => "instock".tr();
+  static String get outofstock => "outofstock".tr();
+  static String get people => "people".tr();
+  static String get addedtocart => "addedtocart".tr();
 }
