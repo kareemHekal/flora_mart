@@ -74,4 +74,5 @@ class AppStrings {
   static String get alreadyHaveAnAccount => "alreadyHaveAnAccount".tr();
   static String get loginSuccessfully => "loginSuccessfully".tr();
   static String get addtocart => "addtocart".tr();
+  static String get filter => "filter".tr();
 }

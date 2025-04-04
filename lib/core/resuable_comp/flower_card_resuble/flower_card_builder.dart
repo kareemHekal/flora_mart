@@ -1,5 +1,5 @@
 import 'package:flora_mart/core/resuable_comp/flower_card_resuble/flower_card.dart';
-import 'package:flora_mart/presentation/tabs/categories_tab/categories_screen.dart';
+import 'package:flora_mart/presentation/tabs/categories_tab/view/categories_screen.dart';
 import 'package:flutter/material.dart';
 
 class FlowerCardBuilder extends StatelessWidget {
