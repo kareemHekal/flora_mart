@@ -29,17 +29,11 @@ class CategoriesDatasourceImpl extends CategoriesDatasource {
           AllCategoriesResponse.fromJson(response.data);
 
       print(
-          "📌 Parsed Categories Response: ${allCategoriesResponse.categories}");
+          "📌 Parsed Categories Response: ${allCategoriesResponse.categories?.length}");
 
-      var filteredCategories =
-          allCategoriesResponse.categories?.where((category) {
-        bool idMatches = category.id == id || id.isEmpty;
-        bool nameMatches = category.name == name || name.isEmpty;
-        bool productsCountMatches = category.productsCount == productsCount;
-        return idMatches && nameMatches && productsCountMatches;
-      }).toList();
+      var filteredCategories = allCategoriesResponse.categories;
 
-      print("📌 Filtered Categories: $filteredCategories");
+      print("📌 Filtered Categories: ${filteredCategories?.length}");
 
       if (filteredCategories != null && filteredCategories.isNotEmpty) {
         return SuccessApiResult(filteredCategories);
