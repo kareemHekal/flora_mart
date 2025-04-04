@@ -4,7 +4,6 @@ import 'package:flora_mart/core/utils/string_manager.dart';
 import 'package:flora_mart/presentation/tabs/home_tab/widgets/best_seller_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 
 import 'widgets/Category widget.dart';
 import 'widgets/occasion_widget.dart';
@@ -26,10 +25,10 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.white,
         title: Row(
           children: [
-            SvgPicture.asset(
-              "assets/images/logo.svg",
-              width: 500,
-              height: 500,
+            Image.asset(
+              "assets/images/Logo.png",
+              height: 25.h,
+              width: 89.w,
             ),
             CustomSearchBar(
               margin: EdgeInsets.all(3),
