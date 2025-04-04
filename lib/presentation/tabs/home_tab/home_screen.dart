@@ -4,12 +4,14 @@ import 'package:flora_mart/core/utils/string_manager.dart';
 import 'package:flora_mart/presentation/tabs/home_tab/widgets/best_seller_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
 import 'widgets/Category widget.dart';
 import 'widgets/occasion_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   final VoidCallback onViewAllTapped;
+
   const HomeScreen({required this.onViewAllTapped, super.key});
 
   @override
@@ -24,10 +26,10 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.white,
         title: Row(
           children: [
-            Image.asset(
-              "assets/images/Logo.png",
-              height: 25.h,
-              width: 89.w,
+            SvgPicture.asset(
+              "assets/images/logo.svg",
+              width: 500,
+              height: 500,
             ),
             CustomSearchBar(
               margin: EdgeInsets.all(3),
@@ -92,8 +94,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                     ),
                   ),
-                  SizedBox(height: 10,),
-
+                  SizedBox(
+                    height: 10,
+                  ),
                 ],
               ),
             ),
@@ -132,8 +135,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                     ),
                   ),
-                  SizedBox(height: 10,),
-
+                  SizedBox(
+                    height: 10,
+                  ),
                 ],
               ),
             ),
@@ -166,7 +170,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       scrollDirection: Axis.horizontal,
                       itemCount: 20,
                       itemBuilder: (context, index) {
-                        return OccasionWidget(image: 'https://picsum.photos/200',);
+                        return OccasionWidget(
+                          image: 'https://picsum.photos/200',
+                        );
                       },
                     ),
                   ),
