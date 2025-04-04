@@ -13,7 +13,7 @@ import 'config/theme/app_theme.dart';
 import 'core/utils/routes_manager.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
 
   @override
   Widget build(
@@ -28,14 +28,13 @@ class MyApp extends StatelessWidget {
     }
 
     return ScreenUtilInit(
-      designSize: Size(430, 932),
+      designSize: Size(375, 852),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
 
-         
           // routes: {
           //   RouteManager.homeScreen: (context) => HomeScreen(),
           //   RouteManager.cartScreen: (context) => CartScreen(),

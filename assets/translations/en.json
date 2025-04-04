@@ -80,5 +80,9 @@
   "instock": "In stock",
   "outofstock": "out of stock",
   "people": "People",
-  "addedtocart": "Added to cart"
+  "addedtocart": "Added to cart",
+  "categories": "Categories",
+  "bestSeller": "Best seller",
+  "occasion": "Occasion",
+  "viewAll": "View All"
 }
