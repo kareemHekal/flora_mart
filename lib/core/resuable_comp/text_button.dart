@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
+import '../utils/colors_manager.dart';
+
 class CustomTextButton extends StatelessWidget {
   Color color;
   Color textColor;
   String text;
-  final Color borderColor;
   void Function()? onPressed;
 
   CustomTextButton(
       {required this.onPressed,
-      required this.borderColor,
-      required this.text,
-      required this.color,
-      required this.textColor});
+        required this.text,
+        required this.color,
+        required this.textColor});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,8 @@ class CustomTextButton extends StatelessWidget {
               backgroundColor: color,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
-                  side: BorderSide(color: borderColor, width: 2))),
+                  side:
+                  const BorderSide(color: ColorManager.primaryColor, width: 2))),
           onPressed: onPressed,
           child: Text(text,
               style: TextStyle(
