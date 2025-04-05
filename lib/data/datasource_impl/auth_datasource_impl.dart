@@ -1,52 +1,47 @@
-import 'package:flora_mart/core/api/api_manager.dart';
-import 'package:flora_mart/core/api/api_result.dart';
-import 'package:flora_mart/core/api/endpoints.dart';
-import 'package:flora_mart/data/datasource_contract/auth_datasource.dart';
+
+import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:flora_mart/data/model/auth/auth_response.dart';
 
-@Injectable(as: AuthDatasource)
+import '../../core/api/api_manager.dart';
+import '../datasource_contract/auth_datasource.dart';
+
+@Injectable(as:AuthDatasource )
 class AuthDatasourceImpl extends AuthDatasource {
-  final ApiManager apiManager;
-
   @factoryMethod
+  ApiManager apiManager;
+
   AuthDatasourceImpl(this.apiManager);
 
-  @override
-  Future<ApiResult<AuthResponse>> postRegister({
-    required String firstName,
-    required String lastName,
-    required String email,
-    required String password,
-    required String rePassword,
-    required String phone,
-    required String gender,
-  }) async {
+
+ /* Future<ApiResult<ForgetPasswordEntity>> ForgetPassword(
+      {required String email}) async {
     try {
       var response = await apiManager.postRequest(
-        endpoint: EndPoint.signUpEndpoint,
-        body: {
-          "firstName": firstName,
-          "lastName": lastName,
-          "email": email,
-          "password": password,
-          "rePassword": rePassword,
-          "phone": phone,
-          "gender": gender,
-        },
+        endpoint: EndPoint.ForgetPasswordEndpoints,
+        body: {"email": email},
       );
 
-      AuthResponse registerResponse = AuthResponse.fromJson(response.data);
+      ForgetPasswordResponse forgetResponse = ForgetPasswordResponse.fromJson(
+          response.data);
+      ForgetPasswordEntity forgetPasswordEntity = forgetResponse
+          .toForgetPasswordEntity();
 
-      if (registerResponse.token != null) {
-        return SuccessApiResult(registerResponse);
+      // Ensure proper error handling
+      if (forgetPasswordEntity.code != null) {
+        return ErrorApiResult(Exception(
+            forgetPasswordEntity.message ?? "Unknown error occurred"));
       }
 
-      return ErrorApiResult(
-          Exception(registerResponse.message ?? "An unknown error occurred"));
-    } catch (err) {
-      return ErrorApiResult(
-          Exception("Server connection error: ${err.toString()}"));
+      return SuccessApiResult(forgetPasswordEntity);
+    } on DioException catch (e) {
+      return ErrorApiResult(e);
+    } catch (e) {
+      return ErrorApiResult(Exception("Unexpected error: ${e.toString()}"));
     }
   }
+*/
+
+
+
 }
