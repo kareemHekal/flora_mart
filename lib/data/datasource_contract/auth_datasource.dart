@@ -1,14 +1,6 @@
-import 'package:flora_mart/core/api/api_result.dart';
-import 'package:flora_mart/data/model/auth/auth_response.dart';
+import 'package:dartz/dartz.dart';
 
-abstract class AuthDatasource {
-  Future<ApiResult<AuthResponse>> postRegister({
-    required String firstName,
-    required String lastName,
-    required String email,
-    required String password,
-    required String rePassword,
-    required String phone,
-    required String gender,
-  });
+abstract class AuthDatasource{
+
+ // Future<ApiResult<ResetPasswordResponseEntity>> ResetPassword({required String email,required String NewPassword});
 }
